@@ -1,7 +1,7 @@
 //const validator = require("validator");
 //const mongoose = require("mongoose");
-import validator from "validator"
-import mongoose from "mongoose"
+import validator from "validator";
+import mongoose from "mongoose";
 
 function User(){
   const userSchema = {
