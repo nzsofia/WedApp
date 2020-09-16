@@ -126,8 +126,8 @@ dist
 # IntelliJ
 .idea/
 
+# production
+build/
+
 # testing
 # /coverage
-
-# production
-# /build
