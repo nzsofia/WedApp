@@ -1,27 +1,37 @@
-import React, { Component } from 'react';
+import React, {useEffect, useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-class App extends Component {
+function App() {
 
-  constructor(props) {
-    super(props);
-    this.state = { apiResponse: "" };
-  }
+  const [state,setState]=useState({apiResponse: ""});
 
-  callAPI() {
+  function callAPIget() {
     fetch("http://localhost:9000/testAPI")
       .then(res => res.text())
-      .then(res => this.setState({ apiResponse: res }))
+      .then(res => setState({ apiResponse: res }))
       .catch(err => err);
   }
 
-  componentDidMount() {
-    this.callAPI();
+  function callAPIpost() {
+    const requestOptions = {
+      method: "POST",
+      header: {"Content-Type": "application/json"},
+      body: JSON.stringify({ title: 'React Hooks POST Request Example' })
+    };
+    fetch("http://localhost:9000/testAPI",requestOptions)
+      .then(res => res.text())
+      .then(res => setState({ apiResponse: res }))
+      .catch(err => err);
+      
+    // fetch('https://jsonplaceholder.typicode.com/posts', requestOptions)
+    //     .then(response => response.json())
+    //     .then(data => setState({ apiResponse: data.id }));
   }
 
-  render () {
-    return (
+  useEffect(callAPIpost, []);
+
+  return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo"/>
@@ -37,10 +47,9 @@ class App extends Component {
             Learn React
           </a>
         </header>
-        <p className="App-intro">{this.state.apiResponse}</p>
+        <p className="App-intro">{state.apiResponse}</p>
       </div>
     );
-  }
 }
 
 export default App;
