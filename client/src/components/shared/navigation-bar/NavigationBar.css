@@ -1,0 +1,24 @@
+.nav-bar {
+  display: flex;
+  flex-direction: row;
+
+  background-image: linear-gradient(to right, rgba(162, 255, 51, 0.8), rgba(96, 162, 18, 0.8));
+}
+
+.nav-bar__button {
+  font-weight: 600;
+  color: #3a3a3a;
+  text-decoration: none;
+  display: inline-block;
+  margin: 20px;
+  text-shadow: 0 5px 10px rgba(30, 30, 30, 0.2);
+
+  transition: all .2s;
+}
+
+.nav-bar__button:hover {
+  text-decoration: none;
+  color: #5a5a5a;
+  transform: translateY(-2px);
+  text-shadow: 0 8px 16px rgba(30, 30, 30, 0.3);
+}
