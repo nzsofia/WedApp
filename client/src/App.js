@@ -1,10 +1,18 @@
-import React, {useEffect, useState} from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import NavigationBar from "./components/shared/navigation-bar/NavigationBar";
+import Home from "./components/pages/home/Home";
+import Guests from "./components/pages/guests/Guests";
+import Gifts from "./components/pages/gifts/Gifts";
+import Menu from "./components/pages/menu/Menu";
+import Music from "./components/pages/music/Music";
+import Login from "./components/pages/login/Login";
+import Register from "./components/pages/register/Register";
 import './App.css';
 
 function App() {
 
-  const [state,setState]=useState({apiResponse: ""});
+  const [state, setState] = useState({ apiResponse: "" });
 
   function callAPIget() {
     fetch("http://localhost:9000/testAPI")
@@ -23,33 +31,38 @@ function App() {
       .then(res => res.text())
       .then(res => setState({ apiResponse: res }))
       .catch(err => err);
-      
-    // fetch('https://jsonplaceholder.typicode.com/posts', requestOptions)
-    //     .then(response => response.json())
-    //     .then(data => setState({ apiResponse: data.id }));
   }
 
   useEffect(callAPIpost, []);
 
   return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo"/>
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-        <p className="App-intro">{state.apiResponse}</p>
-      </div>
-    );
+    <Router>
+      <NavigationBar />
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/guests">
+          <Guests />
+        </Route>
+        <Route path="/gifts">
+          <Gifts />
+        </Route>
+        <Route path="/menu">
+          <Menu />
+        </Route>
+        <Route path="/music">
+          <Music />
+        </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/register">
+          <Register />
+        </Route>
+      </Switch>
+    </Router>
+  );
 }
 
 export default App;
