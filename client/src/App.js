@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import NavigationBar from "./components/shared/navigation-bar/NavigationBar";
 import Home from "./components/pages/home/Home";
@@ -11,29 +11,6 @@ import Register from "./components/pages/register/Register";
 import './App.css';
 
 function App() {
-
-  const [state, setState] = useState({ apiResponse: "" });
-
-  function callAPIget() {
-    fetch("http://localhost:9000/testAPI")
-      .then(res => res.text())
-      .then(res => setState({ apiResponse: res }))
-      .catch(err => err);
-  }
-
-  function callAPIpost() {
-    const requestOptions = {
-      method: "POST",
-      header: {"Content-Type": "application/json"},
-      body: JSON.stringify({ title: 'React Hooks POST Request Example' })
-    };
-    fetch("http://localhost:9000/testAPI",requestOptions)
-      .then(res => res.text())
-      .then(res => setState({ apiResponse: res }))
-      .catch(err => err);
-  }
-
-  useEffect(callAPIpost, []);
 
   return (
     <Router>
