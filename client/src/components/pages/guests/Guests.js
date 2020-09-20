@@ -34,8 +34,9 @@ function Guests() {
 
   return (
     <div>
-    <h2>Guests works!</h2>
-    {guests.list.map(guest => <p key={guest._id}>{guest.name}</p>)}
+    <ul>
+    {guests.list.map(guest => <li key={guest._id}>{guest.name}</li>)}
+    </ul>
     </div>
   );
 }
