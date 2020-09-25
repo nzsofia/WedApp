@@ -15,22 +15,26 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 import indexRouter from "./routes/index.js";
 import usersRouter from "./routes/users.js";
 import guestsRouter from "./routes/guests.js";
+import registerRouter from "./routes/register.js";
+import loginRouter from "./routes/login.js";
 
 const app = express();
 
-
 const __dirname = dirname(fileURLToPath(import.meta.url));
+
 
 app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use("/guests", guestsRouter);
+app.use("/register", registerRouter);
+app.use("/login", loginRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
