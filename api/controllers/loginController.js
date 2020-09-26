@@ -1,11 +1,19 @@
-
+import User from "../models/user.js";
 
 function login(req,res){
-  console.log(req.body);
-//  const userCandidate=JSON.parse(req.body);
-  //check if there is a first name and last name in the guest database
-  //if there is, and there is no userId, then he/she can register
-  res.send({message: {code: 200, content: ""}});
+
+  const userCandidate = req.body;
+
+  //check if the email address - password pair exist in the database
+  User.findOne({email: userCandidate.email, password: userCandidate.password}, (err, user) => {
+    if(!err && user){
+      res.send({message: {code: 200, content: ""}});
+    }
+    else{
+      res.send({message: {code: 404, content: "Email address or password incorrect. Please try again!"}});
+    }
+  });
+
 
 }
 

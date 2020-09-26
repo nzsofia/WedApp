@@ -3,7 +3,6 @@ import Guest from "../models/guest.js";
 
 function register(req,res){
 
-  console.log(req.body.fName);
   const userCandidate = req.body;
 
   //check if there is a first name and last name in the guest database
@@ -11,7 +10,7 @@ function register(req,res){
   Guest.findOne({fName: userCandidate.fName, lName: userCandidate.lName}, "userId", (err, guest) => {
 
     if (!err && guest){
-      
+
       if(guest.userId === null){
 
         console.log("Guest found and user does not exist.");
