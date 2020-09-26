@@ -23,7 +23,7 @@ function Guests() {
   return (
     <div>
     <ul>
-    {guests.list.map(guest => <li key={guest._id}>{guest.name}</li>)}
+    {guests.list.map(guest => <li key={guest._id}>{guest.lName} {guest.fName}</li>)}
     </ul>
     </div>
   );

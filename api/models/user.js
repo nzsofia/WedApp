@@ -2,7 +2,8 @@ import validator from "validator";
 import mongoose from "mongoose";
 
 const userSchema = {
-  name: String,
+  fName: String,
+  lName: String,
   email: {
     type: String,
     lowercase: true,
@@ -10,6 +11,7 @@ const userSchema = {
     required: "Email address is required",
     validate: [validator.isEmail, "invalid email"]
   },
+  password: String,
   rsvp: Boolean,
   allergies: String,
   token: String,
