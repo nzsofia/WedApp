@@ -15,13 +15,13 @@ function guestList(req, res) {
         if (!errPlus) {
           res.send({guestList: [...users, ...plusPeople]});
         } else {
-          console.log("Find plus people was unsuccesful!");
+          console.log("Find plus people was unsuccessful!");
         }
 
       });
 
     } else {
-      console.log("Find guests was unsuccesful!");
+      console.log("Find guests was unsuccessful!");
     }
   });
 
