@@ -28,15 +28,16 @@ function Guests() {
     fetch("http://localhost:9000/guests")
       .then(res => res.json())
       .then(res => setGuests({list: res.guestList}))
+      .catch(err => err);
   }
 
   useEffect(testGuest, []);
 
   return (
     <div>
-    <ul>
-    {guests.list.map(guest => <li key={guest._id}>{guest.name}</li>)}
-    </ul>
+      <ul>
+        {guests.list.map(guest => <li key={guest._id}>{guest.name}</li>)}
+      </ul>
     </div>
   );
 }

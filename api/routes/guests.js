@@ -1,9 +1,8 @@
 import express from "express";
-import {guestList} from "../controllers/guestController.js";
+import { guestList, makeDummy } from "../controllers/guestController.js";
 
 const router = express.Router();
 
-
-router.get("/",guestList);
+router.get("/", guestList);
 
 export default router;

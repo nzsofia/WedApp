@@ -16,4 +16,4 @@ const userSchema = {
   expiry_date: Date
 };
 
-export default mongoose.model("user",userSchema);
+export default mongoose.model("user", userSchema);

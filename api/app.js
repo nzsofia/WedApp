@@ -6,10 +6,10 @@ import cookieParser from "cookie-parser";
 import logger from "morgan";
 import cors from "cors";
 
-//Initialize database connection
+// Initialize database connection
 import mongoose from "mongoose";
 mongoose.connect('mongodb://localhost:27017/weddingDB',{useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true});
-var db = mongoose.connection;
+const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 import indexRouter from "./routes/index.js";
@@ -17,7 +17,6 @@ import usersRouter from "./routes/users.js";
 import guestsRouter from "./routes/guests.js";
 
 const app = express();
-
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -47,7 +46,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-//mongoose.connect('mongodb://localhost:27017/WeddingDB',{useUnifiedTopology: true, useNewUrlParser: true});
 
 export default app;
