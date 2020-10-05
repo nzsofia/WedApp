@@ -23,7 +23,10 @@ function Gifts() {
     };
     fetch("http://localhost:9000/gifts/reserve", requestOptions)
       .then(res => res.text())
-      .then(res => console.log(res))
+      .then(res => {
+        console.log(res);
+        getGiftList();
+      })
       .catch(err => err);
 
     event.preventDefault();
