@@ -10,6 +10,27 @@ function giftList(req, res) {
   });
 }
 
+function reserveGift(req, res) {
+  WeddingGift.findById(req.body.giftId, (err, gift) => {
+    if (!err) {
+
+      // TODO get userId from authenticated user
+      const userId = "5f69c45607cd5b2b205799e4";
+      if (!gift.userId) {
+        gift.userId = userId;
+        gift.save();
+        res.send("Gift reserved!");
+      } else {
+        console.log("[reserveGift] Gift with id " + gift._id + " is already reserved.");
+        res.send("The selected gift is already reserved!");
+      }
+
+    } else {
+      console.log("[reserveGift] Gift reserving was unsuccessful!");
+    }
+  });
+}
+
 function makeDummy(req, res) {
   new WeddingGift({
     name: "Cute Puppy",
@@ -23,4 +44,4 @@ function makeDummy(req, res) {
   }).save();
 }
 
-export {giftList, makeDummy};
+export {giftList, reserveGift, makeDummy};

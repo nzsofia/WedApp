@@ -1,8 +1,10 @@
 import express from "express";
-import {giftList, makeDummy} from "../controllers/giftController.js";
+import {giftList, reserveGift, makeDummy} from "../controllers/giftController.js";
 
 const router = express.Router();
 
 router.get("/", giftList);
+
+router.post("/reserve", reserveGift);
 
 export default router;
