@@ -1,5 +1,6 @@
 import User from "../models/user.js";
 import Guest from "../models/guest.js";
+import passport from "passport";
 
 function register(req,res){
 
@@ -14,20 +15,35 @@ function register(req,res){
       if(guest.userId === null){
 
         console.log("Guest found and user does not exist.");
-        const newUser = new User({
-          fName: userCandidate.fName,
-          lName: userCandidate.lName,
-          email: userCandidate.email,
-          password: userCandidate.password
+        //Register user
+        User.register({ username: userCandidate.username,
+                        fName: userCandidate.fName,
+                        lName: userCandidate.lName,
+                        email: userCandidate.username},
+          userCandidate.password, function(err, newUser) {
+
+          if (err) {
+
+              console.log("Something is wrong");
+              console.log(err);
+              res.send({message: {code: 400, content: "Something went wrong."}});
+              
+          }
+          else{
+
+            console.log("Try to authenticate.");
+            passport.authenticate('local')(req, res, function () {
+              //save userId into guest
+              guest.userId = newUser._id;
+              guest.save();
+
+              res.send({message: {code: 200, content: "Everything ok."}});
+            });
+
+          }
+
         });
-        newUser.save();
 
-        console.log(newUser._id);
-        //save userId into guest
-        guest.userId = newUser._id;
-        guest.save();
-
-        res.send({message: {code: 200, content: "Everything ok."}});
       }
       else{
         console.log("Guest found but user already exist");

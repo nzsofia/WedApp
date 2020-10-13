@@ -1,19 +1,41 @@
 import User from "../models/user.js";
+import passport from "passport";
 
-function login(req,res){
+function login(req,res,next){
 
-  const userCandidate = req.body;
+  //check if user exist and password is correct
+  passport.authenticate('local', function (err, user, info) {
 
-  //check if the email address - password pair exist in the database
-  User.findOne({email: userCandidate.email, password: userCandidate.password}, (err, user) => {
-    if(!err && user){
-      res.send({message: {code: 200, content: ""}});
-    }
-    else{
-      res.send({message: {code: 404, content: "Email address or password incorrect. Please try again!"}});
-    }
-  });
+     if(err){
+       res.send({message: {code: 404, content: "Email address or password incorrect. Please try again!"}});
+     } else{
 
+      if (! user) {
+        res.send({message: {code: 404, content: "Email address or password incorrect. Please try again!"}});
+
+      } else{
+
+        console.log("login");
+        //log user in and create cookie
+        req.logIn(user, function(loginErr){
+
+          if(loginErr){
+            res.send({message: {code: 404, content: "Email address or password incorrect. Please try again!"}});
+          }
+          else{
+
+            console.log("You are authenticated.");
+            //req.session.cookie.id = req.user._id;
+            req.session.cookie.username = req.user.username;
+
+            //User is authenticated and logged in
+            res.send({message: {code: 200, content: "Everything ok."}});
+
+          }
+        });
+      }
+     }
+   })(req,res,next);
 
 }
 

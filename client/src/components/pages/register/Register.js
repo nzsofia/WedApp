@@ -10,7 +10,7 @@ function Register() {
   const [user,setUser] = useState({
     fName: "",
     lName: "",
-    email: "",
+    username: "",
     password: ""
   });
 
@@ -81,8 +81,8 @@ function Register() {
       />
       <Input
         onChange={handleChange}
-        value={user.email}
-        name="email"
+        value={user.username}
+        name="username"
         placeholder="Email"
         type="email"
       />

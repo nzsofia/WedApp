@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import './Login.css';
 import Input from "../../shared/input/input.js";
 import Button from "../../shared/button/button.js";
@@ -8,7 +8,7 @@ function Login() {
   const history = useHistory();
 
   const [user,setUser] = useState({
-    email: "",
+    username: "",
     password: ""
   });
 
@@ -32,6 +32,8 @@ function Login() {
     //check in database if email-password pair is correct
     const requestOptions = {
       method: "POST",
+      withCredentials: true,
+      credentials: 'include',
       headers:{
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -56,6 +58,28 @@ function Login() {
       .catch(err => err);
   }
 
+  function authenticate(){
+    fetch("http://localhost:9000/", {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => res.json())
+      .then(res => {
+        //if alredy logged in, load home page
+        if (res.message.code === 200){
+          history.push("/");
+        }
+      })
+      .catch(err => err);
+  }
+
+  //check if user is authorized to access this page
+  useEffect(authenticate, []);
+
   return (
     <div>
       <h1>
@@ -65,8 +89,8 @@ function Login() {
       <form>
         <Input
           onChange={handleChange}
-          value={user.email}
-          name="email"
+          value={user.username}
+          name="username"
           placeholder="Email"
           type="email"
         />
