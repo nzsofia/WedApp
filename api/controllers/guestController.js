@@ -1,7 +1,6 @@
 import User from "../models/user.js";
 import plusPerson from "../models/plus-person.js";
 import Guest from "../models/guest.js";
-import mongoose from "mongoose"; //törlendő!
 
 function guestList(req, res) {
 
