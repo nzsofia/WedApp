@@ -2,7 +2,8 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 const plusPersonSchema = {
-    name: String,
+    fName: String,
+    lName: String,
     userId: {
       type: Schema.Types.ObjectId,
       ref: "user"
