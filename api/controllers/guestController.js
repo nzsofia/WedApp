@@ -1,9 +1,8 @@
 import User from "../models/user.js";
 import plusPerson from "../models/plus-person.js";
 import mongoose from "mongoose"; //törlendő!
-import Guest from "../models/user.js"; //tölendő
 
-function guestList(req,res){
+function guestList(req, res) {
 
     User.find({rsvp: true}, "fName lName", (err,users) => {
 
@@ -31,38 +30,58 @@ function guestList(req,res){
 
 }
 
-function makeDummy(req,res){
+function makeDummy(req, res) {
 
-  // const userItem1 = new plusPerson({
-  //   name: "Plusz Béla",
-  //   userId: mongoose.Types.ObjectId("5f661a7cb554511864caa1e3")
-  // });
-  // userItem1.save();
-  // const userItem2 = new plusPerson({
-  //   name: "Plusz Győző",
-  //   userId: mongoose.Types.ObjectId("5f661a7cb554511864caa1e3")
-  // });
-  // userItem2.save();
-  // const userItem3 = new plusPerson({
-  //   name: "Plusz Tóni",
-  //   userId: mongoose.Types.ObjectId("5f661a7cb554511864caa1e4")
-  // });
-  // userItem3.save();
-  // const userItem4 = new plusPerson({
-  //   name: "Plusz János",
-  //   userId: mongoose.Types.ObjectId("5f661a7cb554511864caa1e5")
-  // });
-  // userItem4.save();
-  // res.send("Plus people saved");
-
-  const guest1 = new Guest({
-    fName: "Gábor",
-    lName: "Németh",
-    userId: null
+  const userItem1 = new User({
+    name: "Vági Levente",
+    email: "vagilevente@gmail.com",
+    rsvp: true
   });
-  guest1.save();
-  res.send({guestList: [guest1]});
+  userItem1.save((err, user) => {
+    new plusPerson({
+      name: "Plusz Béla",
+      userId: mongoose.Types.ObjectId(user.id)
+    }).save();
+  });
+
+  const userItem2 = new User({
+    name: "Németh Zsófi",
+    email: "nemeth.zsofia1001@gmail.com",
+    rsvp: true
+  });
+  userItem2.save((err, user) => {
+    new plusPerson({
+      name: "Plusz Győző",
+      userId: mongoose.Types.ObjectId(user.id)
+    }).save();
+  });
+
+  const userItem3 = new User({
+    name: "Bruce Willis",
+    email: "bruce.willis@gmail.com",
+    rsvp: false
+  });
+  userItem3.save((err, user) => {
+    new plusPerson({
+      name: "Plusz Tóni",
+      userId: mongoose.Types.ObjectId(user.id)
+    }).save();
+  });
+
+  const userItem4 = new User({
+    name: "Mitya",
+    email: "mitya@gmail.com",
+    rsvp: null
+  });
+  userItem4.save((err, user) => {
+    new plusPerson({
+      name: "Plusz Bia",
+      userId: mongoose.Types.ObjectId(user.id)
+    }).save();
+  });
+
+  res.send("Users and Plus people saved");
 
 }
 
-export {guestList, makeDummy};
+export { guestList, makeDummy };

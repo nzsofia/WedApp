@@ -7,8 +7,8 @@ import cors from "cors";
 
 //DB and Passport authentication
 import mongoose from "mongoose";
-import session from "express-session"
-import passport from "passport"
+import session from "express-session";
+import passport from "passport";
 import User from "./models/user.js";
 
 //Routes
@@ -17,6 +17,7 @@ import usersRouter from "./routes/users.js";
 import guestsRouter from "./routes/guests.js";
 import registerRouter from "./routes/register.js";
 import loginRouter from "./routes/login.js";
+import musicRouter from "./routes/tracks.js";
 
 const app = express();
 
@@ -54,6 +55,7 @@ app.use('/users', usersRouter);
 app.use("/guests", guestsRouter);
 app.use("/register", registerRouter);
 app.use("/login", loginRouter);
+app.use("/music", musicRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -70,7 +72,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-
 
 export default app;
