@@ -13,9 +13,7 @@ const userSchema = new mongoose.Schema({
     required: "Email address is required",
     validate: [validator.isEmail, "invalid email"]
   },
-  allergies: String,
-  token: String,
-  expiry_date: Date
+  allergies: String
 });
 
 userSchema.plugin(passportLocalMongoose);

@@ -14,24 +14,26 @@ function register(req,res){
 
       if(guest.userId === null){
 
-        console.log("Guest found and user does not exist.");
+        console.log("[register] Guest found and user does not exist.");
         //Register user
         User.register({ username: userCandidate.username,
                         fName: userCandidate.fName,
                         lName: userCandidate.lName,
-                        email: userCandidate.username},
+                        email: userCandidate.username,
+                        rsvp: null,
+                        allergies: null},
           userCandidate.password, function(err, newUser) {
 
           if (err) {
 
-              console.log("Something is wrong");
+              console.log("[register] Something is wrong");
               console.log(err);
               res.send({message: {code: 400, content: "Something went wrong."}});
-              
+
           }
           else{
 
-            console.log("Try to authenticate.");
+            console.log("[register] Try to authenticate.");
             passport.authenticate('local')(req, res, function () {
               //save userId into guest
               guest.userId = newUser._id;
@@ -46,12 +48,12 @@ function register(req,res){
 
       }
       else{
-        console.log("Guest found but user already exist");
+        console.log("[register] Guest found but user already exist");
         res.send({message: {code: 400, content: "You already registered."}});
       }
     }
     else{
-      console.log("Guest not found");
+      console.log("[register] Guest not found");
       res.send({message: {code: 404, content: "Sorry, you are not authorized to register."}});
     }
   });

@@ -14,17 +14,20 @@ function guestList(req, res) {
       plusPerson.find({"userId": { $in: userIds }}, (errPlus, plusPeople) => {
 
         if(!errPlus){
-          res.send({guestList: [...users,...plusPeople]});
+          res.send({
+                    guestList: [...users,...plusPeople],
+                    message: {code: 200, content: "Everything ok."}
+                  });
         }
         else{
-          console.log("Find plus people was unsuccesful!");
+          console.log("[guestList] Find plus people was unsuccesful!");
         }
 
       } );
 
     }
     else{
-      console.log("Find guests was unsuccesful!");
+      console.log("[guestList] Find guests was unsuccesful!");
     }
   });
 

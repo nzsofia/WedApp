@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from "react";
 import './Music.css';
+import { useHistory } from "react-router-dom";
 
 function Music() {
 
+  const history = useHistory();
   const [tracks, setTracks] = useState({list: []});
   const [newTrack, setNewTrack] = useState({
     artist: "",
@@ -19,11 +21,23 @@ function Music() {
   }
 
   function getTrackList() {
-    fetch("http://localhost:9000/music")
+    fetch("http://localhost:9000/music", {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
-        setTracks({list: res.trackList});
+        //if authentication failed redirect to login page
+        if (res.message.code === 401){
+          history.push("/login");
+        }
+        else if (res.message.code === 200){
+          setTracks({list: res.trackList});
+        }
       })
       .catch(err => err);
   }
@@ -31,6 +45,8 @@ function Music() {
   function addTrack(event) {
     const requestOptions = {
       method: "POST",
+      withCredentials: true,
+      credentials: 'include',
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json"
@@ -38,11 +54,16 @@ function Music() {
       body: JSON.stringify(newTrack)
     };
     fetch("http://localhost:9000/music", requestOptions)
-      .then(res => res.text())
+      .then(res => res.json())
       .then(res => {
-        console.log(res);
-        setNewTrack({artist: "", title: ""});
-        getTrackList();
+        //if authentication failed redirect to login page
+        if (res.message.code === 401){
+          history.push("/login");
+        }
+        else if (res.message.code === 200){
+          setNewTrack({artist: "", title: ""});
+          getTrackList();
+        }
       })
       .catch(err => err);
 
@@ -50,9 +71,11 @@ function Music() {
   }
 
   function changeLikeOnTrack(event, trackId) {
-    console.log(trackId);
+
     const requestOptions = {
       method: "POST",
+      withCredentials: true,
+      credentials: 'include',
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json"
@@ -60,10 +83,15 @@ function Music() {
       body: JSON.stringify({trackId: trackId})
     };
     fetch("http://localhost:9000/music/vote", requestOptions)
-      .then(res => res.text())
+      .then(res => res.json())
       .then(res => {
-        console.log(res);
-        getTrackList();
+        //if authentication failed redirect to login page
+        if (res.message.code === 401){
+          history.push("/login");
+        }
+        else if (res.message.code === 200){
+          getTrackList();
+        }
       })
       .catch(err => err);
   }
@@ -95,7 +123,7 @@ function Music() {
                 <input type="checkbox"
                        id={"track-checkbox" + track._id}
                        onChange={(e) => changeLikeOnTrack(e, track._id)}
-                       checked={track.users.includes("5f69c45607cd5b2b205799e0") /* TODO get authenticated user's id */}
+                       checked={track.like}
                 />
                 <label htmlFor={"track-checkbox" + track._id}>{track.users.length}</label>
               </span>

@@ -15,7 +15,7 @@ function login(req,res,next){
 
       } else{
 
-        console.log("login");
+        console.log("[login] login");
         //log user in and create cookie
         req.logIn(user, function(loginErr){
 
@@ -24,7 +24,7 @@ function login(req,res,next){
           }
           else{
 
-            console.log("You are authenticated.");
+            console.log("[login] You are authenticated.");
             //req.session.cookie.id = req.user._id;
             req.session.cookie.username = req.user.username;
 

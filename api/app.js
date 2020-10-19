@@ -13,7 +13,6 @@ import User from "./models/user.js";
 
 //Routes
 import indexRouter from "./routes/index.js";
-import usersRouter from "./routes/users.js";
 import guestsRouter from "./routes/guests.js";
 import registerRouter from "./routes/register.js";
 import loginRouter from "./routes/login.js";
@@ -52,7 +51,6 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use("/guests", guestsRouter);
 app.use("/register", registerRouter);
 app.use("/login", loginRouter);
