@@ -7,7 +7,8 @@ const guestSchema = {
   userId: {
     type: Schema.Types.ObjectId,
     ref: "user"
-  }
+  },
+  plusPeopleNum: Number
 };
 
 export default mongoose.model("guest", guestSchema);;

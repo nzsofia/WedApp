@@ -1,5 +1,5 @@
 import User from "../models/user.js";
-import plusPerson from "../models/plus-person.js";
+import PlusPerson from "../models/plus-person.js";
 import Guest from "../models/guest.js";
 
 function guestList(req, res) {
@@ -11,7 +11,7 @@ function guestList(req, res) {
       const userIds = [];
       users.forEach(user => userIds.push(user._id));
 
-      plusPerson.find({"userId": { $in: userIds }}, (errPlus, plusPeople) => {
+      PlusPerson.find({"userId": { $in: userIds }}, (errPlus, plusPeople) => {
 
         if(!errPlus){
           res.send({
@@ -21,6 +21,7 @@ function guestList(req, res) {
         }
         else{
           console.log("[guestList] Find plus people was unsuccesful!");
+          res.send({message: {code: 404, content: "Plus person not found!"}});
         }
 
       } );
@@ -28,6 +29,7 @@ function guestList(req, res) {
     }
     else{
       console.log("[guestList] Find guests was unsuccesful!");
+      res.send({message: {code: 404, content: "Guest not found!"}});
     }
   });
 
