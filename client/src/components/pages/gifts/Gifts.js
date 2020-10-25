@@ -62,7 +62,7 @@ function Gifts() {
   return (
     <div>
       <div className="gift-list-container">
-        {gifts.list.map((gift) => console.log(gifts) ||
+        {gifts.list.map((gift) =>
           <ListItemWithImage key={gift._id}
                              title={gift.name}
                              description={gift.description}

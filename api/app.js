@@ -18,6 +18,8 @@ import registerRouter from "./routes/register.js";
 import loginRouter from "./routes/login.js";
 import musicRouter from "./routes/tracks.js";
 import giftsRouter from "./routes/gifts.js";
+import logoutRouter from "./routes/logout.js";
+import menuRouter from "./routes/menu.js";
 
 const app = express();
 
@@ -56,6 +58,8 @@ app.use("/register", registerRouter);
 app.use("/login", loginRouter);
 app.use("/music", musicRouter);
 app.use("/gifts", giftsRouter);
+app.use("/logout", logoutRouter);
+app.use("/menu", menuRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
