@@ -6,13 +6,14 @@ import Input from "../../shared/input/input.js";
 import Button from "../../shared/button/button.js";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown'
+import Dropdown from 'react-bootstrap/Dropdown';
 
 
 function Home() {
 
   const history = useHistory();
   const rsvpValues = ["-- Please choose an option! --", "Yes, I'm coming to the wedding! :)", "No, I cannot come to the wedding! :("];
+  const namesText = "ZSÓFI & LEVI";
 
   //State variables
   const [response, setResponse] = useState({
@@ -52,7 +53,7 @@ function Home() {
   }
 
   function handleSelect(evKey){
-    setRsvp(evKey)
+    setRsvp(evKey);
   }
 
   function handleChange(event){
@@ -120,6 +121,10 @@ function Home() {
       <div className="App">
         <header className="App-header">
           <img src={homePage} alt="Home design"/>
+          <div className="names">{namesText}</div>
+          <div className="date--1">2021</div>
+          <div className="date--2">SZEPT</div>
+          <div className="date--3">18</div>
         </header>
       </div>
       {hasResponded ? <div><h1>Thank you for your response!</h1></div> :

@@ -1,16 +1,51 @@
 .App-header {
   background-color: #FBFAF7; /* #282c34 */
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #827043;
+  position: relative;
 }
 
-.App-header img {
-  font-family: 'Antic Didone-Regular';
+.App-header {
+  font-family: 'Antic Didone';
+}
+
+.App-header .names {
+  font-size: 4.2vw;
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+}
+
+.App-header .date--1 {
+  font-size: 1.9vw;
+  color: #6C7170;
+  position: absolute;
+  top: 54%;
+  left: 44%;
+  transform: translate(-50%, -50%);
+}
+
+.App-header .date--2 {
+  font-size: 1.9vw;
+  color: #6C7170;
+  position: absolute;
+  top: 54%;
+  left: 50.7%;
+  transform: translate(-50%, -50%);
+}
+
+.App-header .date--3 {
+  font-size: 1.9vw;
+  color: #6C7170;
+  position: absolute;
+  top: 54%;
+  left: 56%;
+  transform: translate(-50%, -50%);
 }
 
 .App-link {
