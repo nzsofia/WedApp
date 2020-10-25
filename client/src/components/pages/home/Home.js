@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import logo from "./logo.svg";
+import homePage from "../../../assets/home_page.svg";
 import './Home.css';
 import { useHistory } from "react-router-dom";
 import Input from "../../shared/input/input.js";
@@ -119,10 +119,7 @@ function Home() {
     <div>
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo"/>
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
+          <img src={homePage} alt="Home design"/>
         </header>
       </div>
       {hasResponded ? <div><h1>Thank you for your response!</h1></div> :
