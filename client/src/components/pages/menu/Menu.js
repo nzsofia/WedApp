@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import './Menu.css';
+import './Menu.scss';
 import { useHistory } from "react-router-dom";
 
 function Menu() {

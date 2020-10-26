@@ -1,5 +1,5 @@
 import React from "react";
-import "./ListItemWithImage.css";
+import "./ListItemWithImage.scss";
 
 function ListItemWithImage({title, description, imageURL, buttonText, onClickCallback, buttonDisabled}) {
   return (

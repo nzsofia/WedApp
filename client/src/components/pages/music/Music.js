@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import './Music.css';
+import './Music.scss';
 import { useHistory } from "react-router-dom";
 
 function Music() {

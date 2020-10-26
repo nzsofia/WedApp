@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
-import homePage from "../../../assets/compositions/home_page.svg";
-import './Home.css';
+import homePage from "../../../assets/svg/compositions/home_page.svg";
+import './Home.scss';
 import { useHistory } from "react-router-dom";
 import Input from "../../shared/input/input.js";
 import Button from "../../shared/button/button.js";
@@ -118,15 +118,13 @@ function Home() {
 
   return (
     <div>
-      <div className="App">
-        <header className="App-header">
-          <img src={homePage} alt="Home design"/>
-          <div className="names">{namesText}</div>
-          <div className="date--1">2021</div>
-          <div className="date--2">SZEPT</div>
-          <div className="date--3">18</div>
-        </header>
-      </div>
+      <header className="header-img">
+        <img src={homePage} alt="Home design"/>
+        <div className="names">{namesText}</div>
+        <div className="date date--1">2021</div>
+        <div className="date date--2">SZEPT</div>
+        <div className="date date--3">18</div>
+      </header>
       {hasResponded ? <div><h1>Thank you for your response!</h1></div> :
       <div>
         <h1>RSVP</h1>

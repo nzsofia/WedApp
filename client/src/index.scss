@@ -1,0 +1,43 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+// TODO
+//html {
+//  font-size: 62.5%; // 1rem = 10px
+//
+//  @include respond(tab-land) {
+//    font-size: 56.25%; // 1rem = 9px
+//  }
+//
+//  @include respond(tab-port) {
+//    font-size: 50%; // 1rem = 8px
+//  }
+//
+//  @include respond(big-desktop) {
+//    font-size: 75%; // 1rem = 12px
+//  }
+//}
+
+body {
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+::selection {
+  background-color: #092532;
+  color: white;
+}

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import './Login.css';
+import './Login.scss';
 import Input from "../../shared/input/input.js";
 import Button from "../../shared/button/button.js";
 import { useHistory } from "react-router-dom";

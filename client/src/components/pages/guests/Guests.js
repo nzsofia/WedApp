@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import './Guests.css';
+import './Guests.scss';
 import { useHistory } from "react-router-dom";
 
 function Guests() {

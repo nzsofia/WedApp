@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import './Register.css';
+import './Register.scss';
 import Input from "../../shared/input/input.js";
 import Button from "../../shared/button/button.js";
 import { useHistory } from "react-router-dom";

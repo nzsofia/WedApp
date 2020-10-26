@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import './Gifts.css';
+import './Gifts.scss';
 import ListItemWithImage from "../../shared/list-item-with-image/ListItemWithImage";
 import { useHistory } from "react-router-dom";
 

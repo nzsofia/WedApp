@@ -8,7 +8,7 @@ import Menu from "./components/pages/menu/Menu";
 import Music from "./components/pages/music/Music";
 import Login from "./components/pages/login/Login";
 import Register from "./components/pages/register/Register";
-import './App.css';
+import './App.scss';
 
 function App() {
 
