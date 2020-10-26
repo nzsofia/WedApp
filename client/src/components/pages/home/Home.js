@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import homePage from "../../../assets/home_page.svg";
+import homePage from "../../../assets/compositions/home_page.svg";
 import './Home.css';
 import { useHistory } from "react-router-dom";
 import Input from "../../shared/input/input.js";
