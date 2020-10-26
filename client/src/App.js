@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-import NavigationBar from "./components/shared/navigation-bar/NavigationBar";
 import Home from "./components/pages/home/Home";
 import Guests from "./components/pages/guests/Guests";
 import Gifts from "./components/pages/gifts/Gifts";
@@ -14,7 +13,6 @@ function App() {
 
   return (
     <Router>
-      <NavigationBar />
       <Switch>
         <Route exact path="/">
           <Home />

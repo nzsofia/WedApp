@@ -7,6 +7,7 @@ import Button from "../../shared/button/button.js";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
+import NavigationBar from "../../shared/navigation-bar/NavigationBar";
 
 
 function Home() {
@@ -118,6 +119,7 @@ function Home() {
 
   return (
     <div>
+      <NavigationBar />
       <header className="header-img">
         <img src={homePage} alt="Home design"/>
         <div className="names">{namesText}</div>

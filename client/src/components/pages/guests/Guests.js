@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import './Guests.scss';
 import { useHistory } from "react-router-dom";
+import NavigationBar from "../../shared/navigation-bar/NavigationBar";
 
 function Guests() {
 
@@ -33,6 +34,7 @@ function Guests() {
 
   return (
     <div>
+      <NavigationBar />
       <ul>
         {guests.list.map(guest => <li key={guest._id}>{guest.fName} {guest.lName}</li>)}
       </ul>

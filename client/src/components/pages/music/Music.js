@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import './Music.scss';
 import { useHistory } from "react-router-dom";
+import NavigationBar from "../../shared/navigation-bar/NavigationBar";
 
 function Music() {
 
@@ -100,6 +101,7 @@ function Music() {
 
   return (
     <div>
+      <NavigationBar />
       <h4>Please, add only the tracks which aren't on the list already!</h4>
       <div className="track-list-container">
         <form>

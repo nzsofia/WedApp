@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import './Menu.scss';
 import { useHistory } from "react-router-dom";
+import NavigationBar from "../../shared/navigation-bar/NavigationBar";
 
 function Menu() {
 
@@ -29,7 +30,10 @@ function Menu() {
   useEffect(authenticate, []);
 
   return (
-    <div>Menu works!</div>
+    <div>
+      <NavigationBar />
+      <div>Menu works!</div>
+    </div>
   );
 }
 

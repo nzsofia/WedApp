@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import './Gifts.scss';
 import ListItemWithImage from "../../shared/list-item-with-image/ListItemWithImage";
 import { useHistory } from "react-router-dom";
+import NavigationBar from "../../shared/navigation-bar/NavigationBar";
 
 function Gifts() {
 
@@ -61,6 +62,7 @@ function Gifts() {
 
   return (
     <div>
+      <NavigationBar />
       <div className="gift-list-container">
         {gifts.list.map((gift) =>
           <ListItemWithImage key={gift._id}
