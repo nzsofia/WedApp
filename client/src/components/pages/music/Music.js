@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import './Music.scss';
 import { useHistory } from "react-router-dom";
 import NavigationBar from "../../shared/navigation-bar/NavigationBar";
+import TextField from "@material-ui/core/TextField";
+import { IconButton } from "@material-ui/core";
+import MusicNoteIcon from '@material-ui/icons/MusicNote';
 
 function Music() {
   const history = useHistory();
@@ -43,6 +46,10 @@ function Music() {
   }
 
   function addTrack(event) {
+    if (!newTrack.artist || !newTrack.title)
+      // TODO popup some error message
+      return;
+
     const requestOptions = {
       method: "POST",
       withCredentials: true,
@@ -110,12 +117,22 @@ function Music() {
       <NavigationBar />
       <h4>Please, add only the tracks which aren't on the list already!</h4>
       <div className="track-list-container">
-        <form>
-          <label htmlFor="artist">Artist</label>
-          <input type="text" id="artist" onChange={changeTrackInput} value={newTrack.artist}/>
-          <label htmlFor="title">Title</label>
-          <input type="text" id="title" onChange={changeTrackInput} value={newTrack.title}/>
-          <button onClick={addTrack}>Add</button>
+        <form autoComplete="on">
+          <TextField id="artist"
+                     label="Artist"
+                     variant="outlined"
+                     required
+                     onChange={changeTrackInput}
+                     value={newTrack.artist} />
+          <TextField id="title"
+                     label="Title"
+                     variant="outlined"
+                     required
+                     onChange={changeTrackInput}
+                     value={newTrack.title} />
+          <IconButton onClick={addTrack}>
+            <MusicNoteIcon />
+          </IconButton>
         </form>
         <ul>
           {tracks.list.sort(trackListSort).map((track) =>
