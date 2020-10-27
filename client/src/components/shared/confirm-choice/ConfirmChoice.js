@@ -10,10 +10,9 @@ function ConfirmChoice(props) {
   const {
     open,
     setOpen,
-    onConfirm = () => {},
+    onAction = (confirm) => {},
     text = "Are you sure you leave this page?",
-    confirmText = "Yes",
-    denyText = "No"
+    omitDenyCallback = true
   } = props;
 
   return (
@@ -26,11 +25,14 @@ function ConfirmChoice(props) {
         <DialogContentText id="confirm-description">{text}</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={() => setOpen(false)} color="primary">{denyText}</Button>
         <Button onClick={() => {
           setOpen(false);
-          onConfirm();
-        }} color="primary" autoFocus>{confirmText}</Button>
+          !omitDenyCallback && onAction(false);
+        }} color="primary">No</Button>
+        <Button onClick={() => {
+          setOpen(false);
+          onAction(true);
+        }} color="primary" autoFocus>Yes</Button>
       </DialogActions>
     </Dialog>
   );
