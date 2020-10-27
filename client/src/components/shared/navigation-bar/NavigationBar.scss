@@ -12,7 +12,9 @@
   }
 
   &__button {
-    font-weight: 600;
+    font-size: .8rem;
+    font-weight: 400;
+    text-transform: uppercase;
     color: rgba($color-secondary, 0.6);
     text-decoration: none;
     display: inline-block;
@@ -23,7 +25,7 @@
 
     &:hover {
       text-decoration: none;
-      color: rgba($color-secondary, 0.8);
+      color: $color-secondary;
       transform: translateY(-2px);
       text-shadow: $text-shadow-hover;
     }

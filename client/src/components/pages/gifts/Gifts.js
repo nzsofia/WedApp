@@ -1,8 +1,12 @@
 import React, {useState, useEffect} from "react";
 import './Gifts.scss';
-import ListItemWithImage from "../../shared/list-item-with-image/ListItemWithImage";
 import { useHistory } from "react-router-dom";
 import NavigationBar from "../../shared/navigation-bar/NavigationBar";
+import { Card, CardContent, CardHeader, CardMedia, Typography, CardActions, Button, Avatar } from "@material-ui/core";
+import leaf1 from "../../../assets/svg/leaf-1.svg";
+import leaf2 from "../../../assets/svg/leaf-2.svg";
+import grass1 from "../../../assets/svg/grass-1.svg";
+import grass2 from "../../../assets/svg/grass-2.svg";
 
 function Gifts() {
 
@@ -21,11 +25,11 @@ function Gifts() {
       .then(res => res.json())
       .then(res => {
         //if authentication failed redirect to login page
-        if (res.message.code === 401){
+        if (res.message.code === 401) {
           history.push("/login");
         }
-        else if (res.message.code === 200){
-          setGifts({list: res.giftList})
+        else if (res.message.code === 200) {
+          setGifts({list: res.giftList});
         }
       })
       .catch(err => err);
@@ -46,10 +50,10 @@ function Gifts() {
       .then(res => res.json())
       .then(res => {
         //if authentication failed redirect to login page
-        if (res.message.code === 401){
+        if (res.message.code === 401) {
           history.push("/login");
         }
-        else if (res.message.code === 200){
+        else if (res.message.code === 200) {
           getGiftList();
         }
       })
@@ -60,19 +64,43 @@ function Gifts() {
 
   useEffect(getGiftList, []);
 
+  function renderAvatarImage(index) {
+    switch (index) {
+      case 0:
+        return leaf1;
+      case 1:
+        return grass2;
+      case 2:
+        return leaf2;
+      default:
+        return grass1;
+    }
+  }
+
   return (
     <div>
       <NavigationBar />
       <div className="gift-list-container">
-        {gifts.list.map((gift) =>
-          <ListItemWithImage key={gift._id}
-                             title={gift.name}
-                             description={gift.description}
-                             imageURL={gift.imgURL}
-                             buttonText="Reserve"
-                             onClickCallback={(event) => reserveGift(event, gift._id)}
-                             buttonDisabled={!!gift.userId}
-          />
+        {gifts.list.map((gift, index) =>
+          <Card className="gift" key={gift._id}>
+            <CardHeader title={gift.name}
+                        className="gift__title"
+                        avatar={
+                          <Avatar variant="square"
+                                  alt="Leaf"
+                                  className={"gift__avatar gift__avatar--" + (index % 4 + 1)}
+                                  src={renderAvatarImage(index % 4)} />
+                        } />
+            <CardMedia className="gift__img" image={gift.imgURL} />
+            <CardContent>
+              <Typography component="p" className="gift_description">{gift.description}</Typography>
+            </CardContent>
+            <CardActions disableSpacing>
+              <Button disabled={!!gift.userId}
+                      onClick={(event) => reserveGift(event, gift._id)}
+                      className="gift__button">Reserve</Button>
+            </CardActions>
+          </Card>
         )}
       </div>
     </div>

@@ -1,0 +1,74 @@
+@import "src/assets/scss/variables";
+
+.gift-list-container {
+  background-color: $color-background;
+  padding: 2rem 0 2rem 2rem;
+}
+
+.gift {
+  width: 15rem;
+  display: inline-block;
+  margin-right: 2rem;
+  margin-bottom: 1rem;
+  position: relative;
+
+  &__title span {
+    font-weight: 600;
+  }
+
+  &__avatar {
+    background-color: transparent;
+
+    .MuiAvatar-img {
+      object-fit: inherit !important;
+    }
+
+    &--1 {
+      transform: rotate(-45deg);
+
+      .MuiAvatar-img {
+        width: 140% !important;
+      }
+    }
+
+    &--2 {
+      transform: rotate(20deg);
+
+      .MuiAvatar-img {
+        width: 115% !important;
+      }
+    }
+
+    &--3 {
+      transform: rotate(-80deg);
+
+      .MuiAvatar-img {
+        width: 120% !important;
+      }
+    }
+
+    &--4 {
+      transform: rotate(-60deg);
+
+      .MuiAvatar-img {
+        width: 110% !important;
+      }
+    }
+  }
+
+  &__img {
+    height: 150px;
+    width: 150px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 0 auto;
+  }
+
+  &__description {}
+
+  &__button {
+    //position: absolute !important;
+    //right: .5rem;
+    //bottom: .5rem;
+  }
+}
