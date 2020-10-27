@@ -3,8 +3,13 @@ import './Music.scss';
 import { useHistory } from "react-router-dom";
 import NavigationBar from "../../shared/navigation-bar/NavigationBar";
 import TextField from "@material-ui/core/TextField";
-import { IconButton } from "@material-ui/core";
+import {Badge, IconButton, List} from "@material-ui/core";
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 
 function Music() {
   const history = useHistory();
@@ -47,7 +52,10 @@ function Music() {
 
   function addTrack(event) {
     if (!newTrack.artist || !newTrack.title)
-      // TODO popup some error message
+      // TODO popup fields are required message
+      return;
+    if (tracks.list.filter(filterTracks).length > 0)
+      // TODO popup like song below message
       return;
 
     const requestOptions = {
@@ -112,43 +120,50 @@ function Music() {
     return b.title < a.title ? 1 : -1;
   }
 
+  function filterTracks(track) {
+    return track.artist.toLowerCase().match(newTrack.artist.toLowerCase()) &&
+      track.title.toLowerCase().match(newTrack.title.toLowerCase());
+  }
+
   return (
     <div>
       <NavigationBar />
-      <h4>Please, add only the tracks which aren't on the list already!</h4>
       <div className="track-list-container">
-        <form autoComplete="on">
+        <form autoComplete="on" className="track-add-form">
           <TextField id="artist"
                      label="Artist"
                      variant="outlined"
                      required
+                     className="track-add-form__input"
                      onChange={changeTrackInput}
                      value={newTrack.artist} />
           <TextField id="title"
                      label="Title"
                      variant="outlined"
                      required
+                     className="track-add-form__input"
                      onChange={changeTrackInput}
                      value={newTrack.title} />
-          <IconButton onClick={addTrack}>
+          <IconButton onClick={addTrack} className="track-add-form__button">
             <MusicNoteIcon />
           </IconButton>
         </form>
-        <ul>
-          {tracks.list.sort(trackListSort).map((track) =>
-            <li key={track._id}>
-              {track.artist + " - " + track.title}
-              <span>
-                <input type="checkbox"
-                       id={"track-checkbox" + track._id}
-                       onChange={(e) => changeLikeOnTrack(e, track._id)}
-                       checked={track.like}
-                />
-                <label htmlFor={"track-checkbox" + track._id}>{track.users.length}</label>
-              </span>
-            </li>
+        <List className="track-list">
+          {tracks.list.sort(trackListSort).filter(filterTracks).map((track) =>
+            <ListItem key={track._id} className="track-list__item">
+              <ListItemText primary={track.artist + " - " + track.title} />
+              <ListItemSecondaryAction>
+                <IconButton edge="end"
+                            aria-label="Like"
+                            onClick={(e) => changeLikeOnTrack(e, track._id)}>
+                  <Badge badgeContent={track.users.length} color="primary">
+                    {track.like ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+                  </Badge>
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
           )}
-        </ul>
+        </List>
       </div>
     </div>
   );

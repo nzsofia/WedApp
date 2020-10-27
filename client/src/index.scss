@@ -1,3 +1,5 @@
+@import "./assets/scss/variables";
+
 *,
 *::after,
 *::before {
@@ -27,6 +29,7 @@ body {
   box-sizing: border-box;
   font-size: 1.6rem !important;
   font-family: 'Montserrat', sans-serif !important;
+  background-color: $color-background !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -36,7 +39,16 @@ code {
     monospace;
 }
 
+div[class^="Mui"],
+svg[class^="Mui"],
+span[class^="Mui"],
+button[class^="Mui"],
+label[class^="Mui"] {
+  font-family: inherit;
+  font-size: inherit;
+}
+
 ::selection {
-  background-color: #092532;
-  color: white;
+  background-color: $color-primary-background;
+  color: $color-primary-font;
 }
