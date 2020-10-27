@@ -3,7 +3,7 @@ import './Music.scss';
 import { useHistory } from "react-router-dom";
 import NavigationBar from "../../shared/navigation-bar/NavigationBar";
 import TextField from "@material-ui/core/TextField";
-import {Badge, IconButton, List} from "@material-ui/core";
+import { Badge, IconButton, List } from "@material-ui/core";
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";

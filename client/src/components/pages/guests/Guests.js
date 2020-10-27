@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import './Guests.scss';
 import { useHistory } from "react-router-dom";
 import NavigationBar from "../../shared/navigation-bar/NavigationBar";
+import { List } from "@material-ui/core";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
 
 function Guests() {
   const history = useHistory();
@@ -34,11 +37,16 @@ function Guests() {
   return (
     <div>
       <NavigationBar />
-      <ul>
-        {guests.list.map(guest =>
-          <li key={guest._id}>{guest.fName} {guest.lName}</li>
-        )}
-      </ul>
+      <div className="guest-list-container">
+        <List className="guest-list">
+          {guests.list.map(guest =>
+            <ListItem key={guest._id} className="guest-list__item">
+              <ListItemText primary={guest.lName + " " + guest.fName} />
+            </ListItem>
+          )}
+        </List>
+        <div className="guest-list-container__decoration">&nbsp;</div>
+      </div>
     </div>
   );
 }
