@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import './Register.scss';
 import Input from "../../shared/input/input.js";
 import Button from "../../shared/button/button.js";
@@ -19,7 +19,7 @@ function Register() {
     content: ""
   });
 
-  function handleChange(event){
+  function handleChange(event) {
     const {name, value} = event.target;
 
     setUser(prevUser => {
@@ -31,74 +31,72 @@ function Register() {
   }
 
   function performRegistration(event) {
-
-    //check in database if user already exist
+    // check in database if user already exist
     const requestOptions = {
       method: "POST",
-      headers:{
+      headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
       },
       body: JSON.stringify(user)
     };
 
-    fetch("http://localhost:9000/register",requestOptions)
+    fetch("http://localhost:9000/register", requestOptions)
       .then(res => res.json())
       .then(res => {
         setReturnMessage(res.message);
 
-        //if it exists, notify user
-        //if everything is correct redirect to login page
-        if (res.message.code === 200){
+        // if it exists, notify user
+        // if everything is correct redirect to login page
+        if (res.message.code === 200) {
           history.push("/login");
         }
-        else{
+        else {
           event.preventDefault();
         }
       })
       .catch(err => err);
   }
 
-
   return (
     <div>
-    <h1>
-      Register
-    </h1>
-    {returnMessage.code !== 200 && <p>{returnMessage.content}</p>}
-    <form>
-      <Input
-        onChange={handleChange}
-        value={user.fName}
-        name="fName"
-        placeholder="First Name"
-      />
-      <Input
-        onChange={handleChange}
-        value={user.lName}
-        name="lName"
-        placeholder="Last Name"
-      />
-      <Input
-        onChange={handleChange}
-        value={user.username}
-        name="username"
-        placeholder="Email"
-        type="email"
-      />
-      <Input
-        onChange={handleChange}
-        value={user.password}
-        name="password"
-        placeholder="Password"
-        type="password"
-      />
-      <Button
-        name="Submit"
-        onClick={performRegistration}
-        type="button"
-      />
-    </form>
+      <h1>
+        Register
+      </h1>
+      {returnMessage.code !== 200 && <p>{returnMessage.content}</p>}
+      <form>
+        <Input
+          onChange={handleChange}
+          value={user.fName}
+          name="fName"
+          placeholder="First Name"
+        />
+        <Input
+          onChange={handleChange}
+          value={user.lName}
+          name="lName"
+          placeholder="Last Name"
+        />
+        <Input
+          onChange={handleChange}
+          value={user.username}
+          name="username"
+          placeholder="Email"
+          type="email"
+        />
+        <Input
+          onChange={handleChange}
+          value={user.password}
+          name="password"
+          placeholder="Password"
+          type="password"
+        />
+        <Button
+          name="Submit"
+          onClick={performRegistration}
+          type="button"
+        />
+      </form>
     </div>
   );
 }

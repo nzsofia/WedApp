@@ -8,7 +8,6 @@ import IconButton from "@material-ui/core/IconButton";
 import { ExitToApp } from "@material-ui/icons";
 
 function NavigationBar() {
-
   const history = useHistory();
 
   function logout(event) {
@@ -22,7 +21,7 @@ function NavigationBar() {
     })
       .then(res => res.json())
       .then(res => {
-        //if authentication failed or logout succeeded redirect to login page
+        // if authentication failed or logout succeeded redirect to login page
         if (res.message.code === 401 || res.message.code === 200) {
           history.push("/login");
         }

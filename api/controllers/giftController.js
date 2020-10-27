@@ -48,4 +48,4 @@ function makeDummy(req, res) {
   res.send({message: {code: 200, content: "Example gifts saved!"}});
 }
 
-export {giftList, reserveGift, makeDummy};
+export { giftList, reserveGift, makeDummy };

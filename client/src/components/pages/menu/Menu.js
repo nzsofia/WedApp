@@ -1,13 +1,12 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import './Menu.scss';
 import { useHistory } from "react-router-dom";
 import NavigationBar from "../../shared/navigation-bar/NavigationBar";
 
 function Menu() {
-
   const history = useHistory();
 
-  function authenticate(){
+  function authenticate() {
     fetch("http://localhost:9000/menu", {
       method: "GET",
       credentials: "include",
@@ -18,15 +17,15 @@ function Menu() {
     })
       .then(res => res.json())
       .then(res => {
-        //if authentication failed redirect to login page
-        if (res.message.code === 401){
+        // if authentication failed redirect to login page
+        if (res.message.code === 401) {
           history.push("/login");
         }
       })
       .catch(err => err);
   }
 
-  //check if user is authorized to access this page
+  // check if user is authorized to access this page
   useEffect(authenticate, []);
 
   return (

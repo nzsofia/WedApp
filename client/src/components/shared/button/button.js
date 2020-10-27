@@ -1,7 +1,9 @@
-import React from "react"
+import React from "react";
 
-function Button(props){
-  return <button type={props.type} onClick={props.onClick}>{props.name}</button>;
+function Button(props) {
+  return (
+    <button type={props.type} onClick={props.onClick}>{props.name}</button>
+  );
 }
 
 Button.defaultProps = {

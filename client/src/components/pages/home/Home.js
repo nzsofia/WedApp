@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import homePage from "../../../assets/svg/compositions/home_page.svg";
 import './Home.scss';
 import { useHistory } from "react-router-dom";
@@ -11,12 +11,11 @@ import NavigationBar from "../../shared/navigation-bar/NavigationBar";
 
 
 function Home() {
-
   const history = useHistory();
   const rsvpValues = ["-- Please choose an option! --", "Yes, I'm coming to the wedding! :)", "No, I cannot come to the wedding! :("];
   const namesText = "ZSÓFI & LEVI";
 
-  //State variables
+  // State variables
   const [response, setResponse] = useState({
       allergies: ""
   });
@@ -25,8 +24,7 @@ function Home() {
   const [maxInput, setMaxInput] = useState(1);
   const [hasResponded, setHasResponded] = useState(false);
 
-
-  function authenticate(){
+  function authenticate() {
     fetch("http://localhost:9000/", {
       method: "GET",
       credentials: "include",
@@ -37,15 +35,15 @@ function Home() {
     })
       .then(res => res.json())
       .then(res => {
-        //if authentication failed redirect to login page
-        if (res.message.code === 401){
+        // if authentication failed redirect to login page
+        if (res.message.code === 401) {
           history.push("/login");
         }
-        else if (res.message.code === 200){
-          //set the number of plus people allowed as the maximum for the number of input fields that can be added
+        else if (res.message.code === 200) {
+          // set the number of plus people allowed as the maximum for the number of input fields that can be added
           if (res.plusPeopleNumber)
             setMaxInput(res.plusPeopleNumber);
-          //do not show response form, if user already responded
+          // do not show response form, if user already responded
           if (res.rsvp!=null)
             setHasResponded(true);
         }
@@ -53,11 +51,11 @@ function Home() {
       .catch(err => err);
   }
 
-  function handleSelect(evKey){
+  function handleSelect(evKey) {
     setRsvp(evKey);
   }
 
-  function handleChange(event){
+  function handleChange(event) {
     const {name, value} = event.target;
 
     setResponse(prevResponse => {
@@ -68,19 +66,18 @@ function Home() {
     });
   }
 
-  function handleChangePlusPeople(event, index){
+  function handleChangePlusPeople(event, index) {
     const {name, value} = event.target;
     const tempList = [...plusPeople];
     tempList[index][name] = value;
     setPlusPeople(tempList);
   }
 
-  function addPlusPerson(){
+  function addPlusPerson() {
     setPlusPeople([...plusPeople, {key: plusPeople.length, fNamePP: "", lNamePP: ""}]);
   }
 
-  function sendResponse(event){
-
+  function sendResponse(event) {
     const responseData = {
       rsvp: rsvpValues.findIndex(v => v === rsvp),
       allergies: response.allergies,
@@ -98,23 +95,22 @@ function Home() {
       body: JSON.stringify(responseData)
     };
 
-    fetch("http://localhost:9000/",requestOptions)
+    fetch("http://localhost:9000/", requestOptions)
       .then(res => res.json())
       .then(res => {
-
-        //if response was saved, notify user
-        if (res.message.code === 200){
+        // if response was saved, notify user
+        if (res.message.code === 200) {
           setHasResponded(true);
         }
-        else{
-          //pop-up notification or something
+        else {
+          // TODO: pop-up notification or something
         }
         event.preventDefault();
       })
       .catch(err => err);
   }
 
-  //check if user is authorized to access this page
+  // check if user is authorized to access this page
   useEffect(authenticate, []);
 
   return (
@@ -138,8 +134,8 @@ function Home() {
             id="dropdown-menu-align-right"
             onSelect={handleSelect}
           >
-              <Dropdown.Item eventKey={rsvpValues[1]}>{rsvpValues[1]}</Dropdown.Item>
-              <Dropdown.Item eventKey={rsvpValues[2]}>{rsvpValues[2]}</Dropdown.Item>
+            <Dropdown.Item eventKey={rsvpValues[1]}>{rsvpValues[1]}</Dropdown.Item>
+            <Dropdown.Item eventKey={rsvpValues[2]}>{rsvpValues[2]}</Dropdown.Item>
           </DropdownButton>
           {plusPeople.map((plusPerson, i) => {
             return(
@@ -177,7 +173,7 @@ function Home() {
             onClick={sendResponse}
           />
         </form>
-      </div> }
+      </div>}
     </div>
   );
 }

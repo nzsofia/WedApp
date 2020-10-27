@@ -5,13 +5,13 @@ import { fileURLToPath } from "url";
 import logger from "morgan";
 import cors from "cors";
 
-//DB and Passport authentication
+// DB and Passport authentication
 import mongoose from "mongoose";
 import session from "express-session";
 import passport from "passport";
 import User from "./models/user.js";
 
-//Routes
+// Routes
 import indexRouter from "./routes/index.js";
 import guestsRouter from "./routes/guests.js";
 import registerRouter from "./routes/register.js";
@@ -32,22 +32,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-//Session and authentication
+// Session and authentication
 app.use(session({
   secret: "I hope this will work.",
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false, maxAge: ((1000 * 60) * 60) } //1 hour
+  cookie: { secure: false, maxAge: ((1000 * 60) * 60) } // 1 hour
 }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-//Initialize database connection
-mongoose.connect('mongodb://localhost:27017/weddingDB',{useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true});
+// Initialize database connection
+mongoose.connect('mongodb://localhost:27017/weddingDB', {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-//initialize Passport authentication -> maybe put into separate file
+// Initialize Passport authentication -> maybe put into separate file
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());

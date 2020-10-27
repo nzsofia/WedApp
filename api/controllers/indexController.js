@@ -3,43 +3,43 @@ import Guest from "../models/guest.js";
 import User from "../models/user.js";
 import PlusPerson from "../models/plus-person.js";
 
-function home(req,res){
+function home(req, res) {
 
   Guest.findOne({userId: req.user._id}, "plusPeopleNum", (err,guest) => {
-    if (!err){
+    if (!err) {
 
       User.findById(req.user._id, (userErr, user) => {
-        if (!userErr){
+        if (!userErr) {
           res.send({  rsvp: user.rsvp,
                       plusPeopleNumber: guest.plusPeopleNum,
                       message: {code: 200, content: "Everything ok."}});
         }
-        else{
+        else {
           res.send({  plusPeopleNumber: guest.plusPeopleNum,
                       message: {code: 200, content: "Everything ok."}});
         }
       });
 
     }
-    else{
+    else {
       res.send({message: {code: 404, content: "Guest not found!"}});
     }
   });
 
 }
 
-function saveResponse(req,res){
+function saveResponse(req, res) {
   const response = req.body;
   User.findById(req.user._id, (err, user) => {
 
-    if (!err){
-      //save reponse into user
+    if (!err) {
+      // save response into user
       user.rsvp = response.rsvp === 1 ? true : false;
       user.allergies = response.allergies;
 
       user.save();
 
-      //save plus People
+      // save plus People
       response.plusPeople.forEach(plusP => {
         if (plusP.fNamePP !== "" && plusP.lNamePP !== "")
           new PlusPerson({
@@ -55,4 +55,4 @@ function saveResponse(req,res){
   });
 }
 
-export {home, saveResponse};
+export { home, saveResponse };

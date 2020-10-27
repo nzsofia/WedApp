@@ -4,7 +4,7 @@ import Guest from "../models/guest.js";
 
 function guestList(req, res) {
 
-  User.find({rsvp: true}, "fName lName", (err,users) => {
+  User.find({rsvp: true}, "fName lName", (err, users) => {
 
     if(!err){
 
@@ -13,21 +13,21 @@ function guestList(req, res) {
 
       PlusPerson.find({"userId": { $in: userIds }}, (errPlus, plusPeople) => {
 
-        if(!errPlus){
+        if(!errPlus) {
           res.send({
-                    guestList: [...users,...plusPeople],
-                    message: {code: 200, content: "Everything ok."}
-                  });
+              guestList: [...users,...plusPeople],
+              message: {code: 200, content: "Everything ok."}
+          });
         }
-        else{
+        else {
           console.log("[guestList] Find plus people was unsuccesful!");
           res.send({message: {code: 404, content: "Plus person not found!"}});
         }
 
-      } );
+      });
 
     }
-    else{
+    else {
       console.log("[guestList] Find guests was unsuccesful!");
       res.send({message: {code: 404, content: "Guest not found!"}});
     }
@@ -36,7 +36,6 @@ function guestList(req, res) {
 }
 
 function makeDummy(req, res) {
-
   new Guest({
     fName: "Levente",
     lName: "Vági",
@@ -59,7 +58,6 @@ function makeDummy(req, res) {
   }).save();
 
   res.send("Guests saved");
-
 }
 
 export { guestList, makeDummy };

@@ -11,4 +11,4 @@ const guestSchema = {
   plusPeopleNum: Number
 };
 
-export default mongoose.model("guest", guestSchema);;
+export default mongoose.model("guest", guestSchema);

@@ -1,6 +1,6 @@
 import express from "express";
-import {home, saveResponse} from "../controllers/indexController.js";
-import {validator} from "../auth/validator.js";
+import { home, saveResponse } from "../controllers/indexController.js";
+import { validator } from "../auth/validator.js";
 
 const router = express.Router();
 

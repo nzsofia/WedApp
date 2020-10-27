@@ -1,6 +1,6 @@
 import express from "express";
 import { guestList, makeDummy } from "../controllers/guestController.js";
-import {validator} from "../auth/validator.js";
+import { validator } from "../auth/validator.js";
 
 const router = express.Router();
 

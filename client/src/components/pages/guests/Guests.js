@@ -1,14 +1,13 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import './Guests.scss';
 import { useHistory } from "react-router-dom";
 import NavigationBar from "../../shared/navigation-bar/NavigationBar";
 
 function Guests() {
-
   const history = useHistory();
-  const [guests, setGuests]=useState({list: []});
+  const [guests, setGuests] = useState({list: []});
 
-  function getGuests(){
+  function getGuests() {
     fetch("http://localhost:9000/guests", {
       method: "GET",
       credentials: "include",
@@ -19,12 +18,12 @@ function Guests() {
     })
       .then(res => res.json())
       .then(res => {
-        //if authentication failed redirect to login page
-        if (res.message.code === 401){
+        // if authentication failed redirect to login page
+        if (res.message.code === 401) {
           history.push("/login");
         }
-        else if (res.message.code === 200){
-          setGuests({list: res.guestList})
+        else if (res.message.code === 200) {
+          setGuests({list: res.guestList});
         }
       })
       .catch(err => err);
@@ -36,7 +35,9 @@ function Guests() {
     <div>
       <NavigationBar />
       <ul>
-        {guests.list.map(guest => <li key={guest._id}>{guest.fName} {guest.lName}</li>)}
+        {guests.list.map(guest =>
+          <li key={guest._id}>{guest.fName} {guest.lName}</li>
+        )}
       </ul>
     </div>
   );

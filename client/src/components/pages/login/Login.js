@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import './Login.scss';
 import Input from "../../shared/input/input.js";
 import Button from "../../shared/button/button.js";
@@ -17,7 +17,7 @@ function Login() {
     content: ""
   });
 
-  function handleChange(event){
+  function handleChange(event) {
     const {name, value} = event.target;
 
     setUser(prevUser => {
@@ -29,36 +29,36 @@ function Login() {
   }
 
   function performLogin(event) {
-    //check in database if email-password pair is correct
+    // check in database if email-password pair is correct
     const requestOptions = {
       method: "POST",
       withCredentials: true,
       credentials: 'include',
-      headers:{
+      headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
       },
       body: JSON.stringify(user)
     };
 
-    fetch("http://localhost:9000/login",requestOptions)
+    fetch("http://localhost:9000/login", requestOptions)
       .then(res => res.json())
       .then(res => {
         setReturnMessage(res.message);
 
-        //if not, notify user, that password or email in incorrect --> automatic
-        //if everything is correct redirect to home page
-        if (res.message.code === 200){
+        // if not, notify user, that password or email in incorrect --> automatic
+        // if everything is correct redirect to home page
+        if (res.message.code === 200) {
           history.push("/");
         }
-        else{
+        else {
           event.preventDefault();
         }
       })
       .catch(err => err);
   }
 
-  function authenticate(){
+  function authenticate() {
     fetch("http://localhost:9000/", {
       method: "GET",
       credentials: "include",
@@ -69,15 +69,15 @@ function Login() {
     })
       .then(res => res.json())
       .then(res => {
-        //if alredy logged in, load home page
-        if (res.message.code === 200){
+        // if alredy logged in, load home page
+        if (res.message.code === 200) {
           history.push("/");
         }
       })
       .catch(err => err);
   }
 
-  //check if user is authorized to access this page
+  // check if user is authorized to access this page
   useEffect(authenticate, []);
 
   return (

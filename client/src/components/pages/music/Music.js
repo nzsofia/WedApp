@@ -1,10 +1,9 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import './Music.scss';
 import { useHistory } from "react-router-dom";
 import NavigationBar from "../../shared/navigation-bar/NavigationBar";
 
 function Music() {
-
   const history = useHistory();
   const [tracks, setTracks] = useState({list: []});
   const [newTrack, setNewTrack] = useState({
@@ -32,11 +31,11 @@ function Music() {
     })
       .then(res => res.json())
       .then(res => {
-        //if authentication failed redirect to login page
-        if (res.message.code === 401){
+        // if authentication failed redirect to login page
+        if (res.message.code === 401) {
           history.push("/login");
         }
-        else if (res.message.code === 200){
+        else if (res.message.code === 200) {
           setTracks({list: res.trackList});
         }
       })
@@ -57,11 +56,11 @@ function Music() {
     fetch("http://localhost:9000/music", requestOptions)
       .then(res => res.json())
       .then(res => {
-        //if authentication failed redirect to login page
-        if (res.message.code === 401){
+        // if authentication failed redirect to login page
+        if (res.message.code === 401) {
           history.push("/login");
         }
-        else if (res.message.code === 200){
+        else if (res.message.code === 200) {
           setNewTrack({artist: "", title: ""});
           getTrackList();
         }
@@ -72,7 +71,6 @@ function Music() {
   }
 
   function changeLikeOnTrack(event, trackId) {
-
     const requestOptions = {
       method: "POST",
       withCredentials: true,
@@ -86,11 +84,11 @@ function Music() {
     fetch("http://localhost:9000/music/vote", requestOptions)
       .then(res => res.json())
       .then(res => {
-        //if authentication failed redirect to login page
-        if (res.message.code === 401){
+        // if authentication failed redirect to login page
+        if (res.message.code === 401) {
           history.push("/login");
         }
-        else if (res.message.code === 200){
+        else if (res.message.code === 200) {
           getTrackList();
         }
       })
@@ -98,6 +96,14 @@ function Music() {
   }
 
   useEffect(getTrackList, []);
+
+  function trackListSort(a, b) {
+    if (b.users.length - a.users.length !== 0)
+      return b.users.length - a.users.length;
+    if (b.artist !== a.artist)
+      return b.artist < a.artist ? 1 : -1;
+    return b.title < a.title ? 1 : -1;
+  }
 
   return (
     <div>
@@ -112,13 +118,7 @@ function Music() {
           <button onClick={addTrack}>Add</button>
         </form>
         <ul>
-          {tracks.list.sort((a, b) => {
-            if (b.users.length - a.users.length !== 0)
-              return b.users.length - a.users.length;
-            if (b.artist !== a.artist)
-              return b.artist < a.artist ? 1 : -1;
-            return b.title < a.title ? 1 : -1;
-          }).map((track) =>
+          {tracks.list.sort(trackListSort).map((track) =>
             <li key={track._id}>
               {track.artist + " - " + track.title}
               <span>

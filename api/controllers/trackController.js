@@ -5,7 +5,7 @@ function trackList(req, res) {
   Track.find({}, (err, tracks) => {
     if (!err) {
       const tracksWithLike = tracks.map(track => {
-        //check if current user liked a track
+        // check if current user liked a track
         const trackLike = track.toObject();
         trackLike.like = track.users.includes(req.user._id);
         return trackLike;
@@ -21,9 +21,9 @@ function trackList(req, res) {
 }
 
 function addTrack(req, res) {
-
   const userId = req.user._id;
   const trackProps = req.body;
+
   new Track({
     ...trackProps,
     users: [userId]
@@ -31,14 +31,13 @@ function addTrack(req, res) {
     if (!err)
       res.send({message: {code: 200, content: "Track addition was successful!"}});
     else
-      res.send({message: {code: 500, content: "Track addition was unsuccessful!"}});;
+      res.send({message: {code: 500, content: "Track addition was unsuccessful!"}});
   });
 }
 
 function changeVote(req, res) {
   Track.findById(req.body.trackId, (err, track) => {
     if (!err) {
-
       const userId = req.user._id;
       if (track.users.includes(userId))
         // delete userId from users array
@@ -56,4 +55,4 @@ function changeVote(req, res) {
 }
 
 export default trackList;
-export {addTrack, changeVote};
+export { addTrack, changeVote };
