@@ -43,6 +43,10 @@
   margin: 2rem auto;
   max-width: 58rem;
 
+  @include respond(phone) {
+    max-width: 100%;
+  }
+
   @include respond(big-desktop) {
     max-width: 83rem;
   }
