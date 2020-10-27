@@ -1,6 +1,50 @@
+@import "src/assets/scss/mixins";
+
 .track-list-container {
+  position: relative;
+  overflow: hidden;
+
+  &__decoration {
+    position: absolute;
+    height: 150%;
+    width: calc((100vw - 18rem) / 4);
+    top: 0;
+
+    @include respond(phone) {
+      display: none;
+    }
+
+    @include respond(big-desktop) {
+      width: calc((100vw - 21rem) / 4);
+    }
+
+    &--left {
+      left: -10rem;
+      background: url("../../../assets/svg/compositions/floral-side-composition-left.svg") repeat-y top left;
+
+      @include respond(big-desktop) {
+        left: -14rem;
+      }
+    }
+
+    &--right {
+      right: -10rem;
+      background: url("../../../assets/svg/compositions/floral-side-composition-right.svg") repeat-y top right;
+
+      @include respond(big-desktop) {
+        right: -14rem;
+      }
+    }
+  }
+}
+
+.track-list-center-container {
   margin: 2rem auto;
-  max-width: 57rem;
+  max-width: 58rem;
+
+  @include respond(big-desktop) {
+    max-width: 83rem;
+  }
 }
 
 .track-add-form {

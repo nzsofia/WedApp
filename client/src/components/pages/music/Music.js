@@ -129,41 +129,45 @@ function Music() {
     <div>
       <NavigationBar />
       <div className="track-list-container">
-        <form autoComplete="on" className="track-add-form">
-          <TextField id="artist"
-                     label="Artist"
-                     variant="outlined"
-                     required
-                     className="track-add-form__input"
-                     onChange={changeTrackInput}
-                     value={newTrack.artist} />
-          <TextField id="title"
-                     label="Title"
-                     variant="outlined"
-                     required
-                     className="track-add-form__input"
-                     onChange={changeTrackInput}
-                     value={newTrack.title} />
-          <IconButton onClick={addTrack} className="track-add-form__button">
-            <MusicNoteIcon />
-          </IconButton>
-        </form>
-        <List className="track-list">
-          {tracks.list.sort(trackListSort).filter(filterTracks).map((track) =>
-            <ListItem key={track._id} className="track-list__item">
-              <ListItemText primary={track.artist + " - " + track.title} />
-              <ListItemSecondaryAction>
-                <IconButton edge="end"
-                            aria-label="Like"
-                            onClick={(e) => changeLikeOnTrack(e, track._id)}>
-                  <Badge badgeContent={track.users.length} color="primary">
-                    {track.like ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-                  </Badge>
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-          )}
-        </List>
+        <div className="track-list-container__decoration track-list-container__decoration--left">&nbsp;</div>
+        <div className="track-list-center-container">
+          <form autoComplete="on" className="track-add-form">
+            <TextField id="artist"
+                       label="Artist"
+                       variant="outlined"
+                       required
+                       className="track-add-form__input"
+                       onChange={changeTrackInput}
+                       value={newTrack.artist} />
+            <TextField id="title"
+                       label="Title"
+                       variant="outlined"
+                       required
+                       className="track-add-form__input"
+                       onChange={changeTrackInput}
+                       value={newTrack.title} />
+            <IconButton onClick={addTrack} className="track-add-form__button">
+              <MusicNoteIcon />
+            </IconButton>
+          </form>
+          <List className="track-list">
+            {tracks.list.sort(trackListSort).filter(filterTracks).map((track) =>
+              <ListItem key={track._id} className="track-list__item">
+                <ListItemText primary={track.artist + " - " + track.title} />
+                <ListItemSecondaryAction>
+                  <IconButton edge="end"
+                              aria-label="Like"
+                              onClick={(e) => changeLikeOnTrack(e, track._id)}>
+                    <Badge badgeContent={track.users.length} color="primary">
+                      {track.like ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+                    </Badge>
+                  </IconButton>
+                </ListItemSecondaryAction>
+              </ListItem>
+            )}
+          </List>
+        </div>
+        <div className="track-list-container__decoration track-list-container__decoration--right">&nbsp;</div>
       </div>
     </div>
   );
