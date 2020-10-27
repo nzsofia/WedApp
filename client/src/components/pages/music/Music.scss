@@ -3,6 +3,7 @@
 .track-list-container {
   position: relative;
   overflow: hidden;
+  min-height: calc(100vh - 64px);
 
   &__decoration {
     position: absolute;
