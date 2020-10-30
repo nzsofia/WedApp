@@ -32,3 +32,51 @@
     }
   }
 }
+
+.response-container{
+  position: relative;
+  overflow: hidden;
+  margin-top: -0.5vw;
+
+  &__decoration {
+    position: absolute;
+    top: 0.3vw;
+    width: 26vw;
+    height: 17vw;
+    &--left {
+      left: -13.3vw;
+      transform: rotate(83deg) scale(1,-1);
+    }
+    &--right {
+      right: -12.3vw;
+      transform: rotate(90deg);
+    }
+  }
+}
+
+.response-form-background{
+  max-width: 50rem;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.plus-people-header{
+  padding-left: 1rem;
+}
+
+.add-container{
+  position: relative;
+  &__btn{
+    position: absolute;
+    top: -3rem;
+    right: 0;
+  }
+}
+
+.submit-response-btn-container{
+  text-align: center;
+}
+
+.submit-response-btn{
+  max-width: 20rem;
+}

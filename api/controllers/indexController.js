@@ -34,7 +34,7 @@ function saveResponse(req, res) {
 
     if (!err) {
       // save response into user
-      user.rsvp = response.rsvp === 1 ? true : false;
+      user.rsvp = response.rsvp;
       user.allergies = response.allergies;
 
       user.save();

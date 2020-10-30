@@ -2,24 +2,22 @@ import React, { useState, useEffect } from "react";
 import homePage from "../../../assets/svg/compositions/home_page.svg";
 import './Home.scss';
 import { useHistory } from "react-router-dom";
-import Input from "../../shared/input/input.js";
-import Button from "../../shared/button/button.js";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown';
+import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded';
+import { InputLabel, FormHelperText, FormControl, Select, Button, TextField, Fab, Paper, Grid, Tooltip  } from "@material-ui/core";
 import NavigationBar from "../../shared/navigation-bar/NavigationBar";
+import grass1 from "../../../assets/svg/grass-1.svg";
 
 
 function Home() {
   const history = useHistory();
-  const rsvpValues = ["-- Please choose an option! --", "Yes, I'm coming to the wedding! :)", "No, I cannot come to the wedding! :("];
+  const rsvpValues = ["Yes, I'm coming to the wedding! :)", "No, I cannot come to the wedding! :("];
   const namesText = "ZSÓFI & LEVI";
 
   // State variables
   const [response, setResponse] = useState({
+      rsvp: null,
       allergies: ""
   });
-  const [rsvp, setRsvp]=useState(rsvpValues[0]);
   const [plusPeople, setPlusPeople] = useState([{key: 0, fNamePP: "", lNamePP: ""}]);
   const [maxInput, setMaxInput] = useState(1);
   const [hasResponded, setHasResponded] = useState(false);
@@ -51,25 +49,21 @@ function Home() {
       .catch(err => err);
   }
 
-  function handleSelect(evKey) {
-    setRsvp(evKey);
-  }
-
   function handleChange(event) {
-    const {name, value} = event.target;
+    const {id, value} = event.target;
 
     setResponse(prevResponse => {
       return {
         ...prevResponse,
-        [name]: value
+        [id]: value
       };
     });
   }
 
   function handleChangePlusPeople(event, index) {
-    const {name, value} = event.target;
+    const {id, value} = event.target;
     const tempList = [...plusPeople];
-    tempList[index][name] = value;
+    tempList[index][id] = value;
     setPlusPeople(tempList);
   }
 
@@ -79,7 +73,7 @@ function Home() {
 
   function sendResponse(event) {
     const responseData = {
-      rsvp: rsvpValues.findIndex(v => v === rsvp),
+      rsvp: response.rsvp,
       allergies: response.allergies,
       plusPeople: plusPeople
     }
@@ -124,55 +118,105 @@ function Home() {
         <div className="date date--3">18</div>
       </header>
       {hasResponded ? <div><h1>Thank you for your response!</h1></div> :
-      <div>
-        <h1>RSVP</h1>
-        <p>Please RSVP here as soon as possible!</p>
-        <form>
-          <DropdownButton
-            alignRight
-            title={rsvp}
-            id="dropdown-menu-align-right"
-            onSelect={handleSelect}
-          >
-            <Dropdown.Item eventKey={rsvpValues[1]}>{rsvpValues[1]}</Dropdown.Item>
-            <Dropdown.Item eventKey={rsvpValues[2]}>{rsvpValues[2]}</Dropdown.Item>
-          </DropdownButton>
-          {plusPeople.map((plusPerson, i) => {
-            return(
-              <div>
-                <Input
-                  onChange={e => handleChangePlusPeople(e,i)}
-                  value={plusPerson.fNamePP}
-                  name="fNamePP"
-                  placeholder="First Name"
-                />
-                <Input
-                  onChange={e => handleChangePlusPeople(e,i)}
-                  value={plusPerson.lNamePP}
-                  name="lNamePP"
-                  placeholder="Last Name"
-                />
-              </div>
-            );
-          })}
-          { plusPeople.length < maxInput && //maybe it can be deactivated (appear grey) not removed
-            <Button
-            name="+"
-            type="button"
-            onClick={addPlusPerson}
-          />}
-          <Input
-            onChange={handleChange}
-            value={response.allergies}
-            name="allergies"
-            placeholder="Allergies"
-          />
-          <Button
-            name="Submit"
-            type="button"
-            onClick={sendResponse}
-          />
-        </form>
+      <div className="response-container">
+        <div className="response-container__decoration response-container__decoration--left">
+          <img src={grass1} alt="grass decoration"/>
+        </div>
+        <div className="response-container__decoration response-container__decoration--right">
+          <img src={grass1} alt="grass decoration"/>
+        </div>
+        <Paper className="response-form-background">
+          <Grid container spacing={2} justify="center" alignItems="center" direction="column">
+            <Grid item>
+                <h1>RSVP</h1>
+            </Grid>
+            <Grid item>
+                <p>Please RSVP here as soon as possible!</p>
+            </Grid>
+            <Grid item>
+              <form>
+                <Grid container direction="column" spacing={2}>
+                  <Grid item>
+                    <FormControl fullWidth required variant="outlined">
+                      <InputLabel htmlFor="rsvp-response">Are you coming to the wedding?</InputLabel>
+                      <Select
+                        native
+                        value={response.rsvp}
+                        onChange={handleChange}
+                        label="Are you coming to the wedding?"
+                        inputProps={{
+                          name: "rsvp",
+                          id: "rsvp-response",
+                        }}
+                      >
+                        <option aria-label="None" value={null} />
+                        <option value={true}>{rsvpValues[0]}</option>
+                        <option value={false}>{rsvpValues[1]}</option>
+                      </Select>
+                      <FormHelperText>Required</FormHelperText>
+                    </FormControl>
+                  </Grid>
+
+                  <Tooltip title="Who comes to the wedding?">
+                    <h2 className="plus-people-header">Plus people</h2>
+                  </Tooltip>
+                  {plusPeople.map((plusPerson, i) => {
+                    return(
+                      <Grid item container direction="row" spacing={2}>
+                        <Grid item xs={12} sm={6}>
+                          <TextField id="fNamePP"
+                                   label="First Name"
+                                   variant="outlined"
+                                   required
+                                   onChange={e => handleChangePlusPeople(e,i)}
+                                   value={plusPerson.fNamePP}
+                                   fullWidth />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                         <TextField id="lNamePP"
+                                  label="Last Name"
+                                  variant="outlined"
+                                  required
+                                  onChange={e => handleChangePlusPeople(e,i)}
+                                  value={plusPerson.lNamePP}
+                                  fullWidth />
+                        </Grid>
+                      </Grid>
+                    );
+                  })}
+
+                  { plusPeople.length < maxInput && //maybe it can be deactivated (appear grey) not removed
+                    <Grid item className="add-container">
+                      <Fab className="add-container__btn" size="small" color="secondary" aria-label="add" onClick={addPlusPerson}>
+                        <AddCircleOutlineRoundedIcon />
+                      </Fab>
+                    </Grid>
+                  }
+
+
+
+                <Grid item>
+                  <TextField id="allergies"
+                           fullWidth
+                           multiline
+                           rows={4}
+                           label="Allergies"
+                           variant="outlined"
+                           onChange={handleChange}
+                           value={response.allergies} />
+                </Grid>
+
+                <Grid item className="submit-response-btn-container">
+                  <Button className="submit-response-btn" fullWidth variant="contained" color="secondary" onClick={sendResponse}>
+                   Submit
+                  </Button>
+                </Grid>
+
+                </Grid>
+              </form>
+            </Grid>
+          </Grid>
+        </Paper>
       </div>}
     </div>
   );
