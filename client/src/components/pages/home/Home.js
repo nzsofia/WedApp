@@ -35,7 +35,7 @@ function Home() {
       .then(res => {
         // if authentication failed redirect to login page
         if (res.message.code === 401) {
-          history.push("/login");
+          history.push("/sign");
         }
         else if (res.message.code === 200) {
           // set the number of plus people allowed as the maximum for the number of input fields that can be added

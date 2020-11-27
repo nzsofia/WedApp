@@ -23,7 +23,7 @@ function NavigationBar() {
       .then(res => {
         // if authentication failed or logout succeeded redirect to login page
         if (res.message.code === 401 || res.message.code === 200) {
-          history.push("/login");
+          history.push("/sign");
         }
         else {
           event.preventDefault();

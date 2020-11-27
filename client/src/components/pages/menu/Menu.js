@@ -19,7 +19,7 @@ function Menu() {
       .then(res => {
         // if authentication failed redirect to login page
         if (res.message.code === 401) {
-          history.push("/login");
+          history.push("/sign");
         }
       })
       .catch(err => err);
