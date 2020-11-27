@@ -5,8 +5,7 @@ import Guests from "./components/pages/guests/Guests";
 import Gifts from "./components/pages/gifts/Gifts";
 import Menu from "./components/pages/menu/Menu";
 import Music from "./components/pages/music/Music";
-import Login from "./components/pages/login/Login";
-import Register from "./components/pages/register/Register";
+import Sign from "./components/pages/sign/Sign";
 import { StylesProvider } from "@material-ui/core/styles";
 import './App.scss';
 
@@ -31,11 +30,8 @@ function App() {
           <Route path="/music">
             <Music />
           </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/register">
-            <Register />
+          <Route path="/sign">
+            <Sign />
           </Route>
           <Route path="*">
             <Redirect to="/" />

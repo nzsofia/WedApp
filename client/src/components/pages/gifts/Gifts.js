@@ -26,7 +26,7 @@ function Gifts() {
       .then(res => {
         //if authentication failed redirect to login page
         if (res.message.code === 401) {
-          history.push("/login");
+          history.push("/sign");
         }
         else if (res.message.code === 200) {
           setGifts({list: res.giftList});
@@ -51,7 +51,7 @@ function Gifts() {
       .then(res => {
         //if authentication failed redirect to login page
         if (res.message.code === 401) {
-          history.push("/login");
+          history.push("/sign");
         }
         else if (res.message.code === 200) {
           getGiftList();
