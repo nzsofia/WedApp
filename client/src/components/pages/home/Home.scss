@@ -31,12 +31,22 @@
       left: 56%;
     }
   }
+
+  .header-rsvp-button{
+    position: absolute;
+    bottom: 9vw;
+    left: 50%;
+    transform: translateX(-50%) translateY(50%);
+    width: 20rem;
+    border-radius: 2rem;
+  }
 }
 
 .response-container{
   position: relative;
   overflow: hidden;
   margin-top: -0.5vw;
+  margin-bottom: 11rem;
 
   &__decoration {
     position: absolute;

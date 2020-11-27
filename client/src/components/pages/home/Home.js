@@ -116,9 +116,12 @@ function Home() {
         <div className="date date--1">2021</div>
         <div className="date date--2">SZEPT</div>
         <div className="date date--3">18</div>
+        {!hasResponded && <Button className="header-rsvp-button" variant="contained" color="secondary" href="#response">
+         RSVP
+        </Button>}
       </header>
       {hasResponded ? <div><h1>Thank you for your response!</h1></div> :
-      <div className="response-container">
+      <div id="response" className="response-container">
         <div className="response-container__decoration response-container__decoration--left">
           <img src={grass1} alt="grass decoration"/>
         </div>
