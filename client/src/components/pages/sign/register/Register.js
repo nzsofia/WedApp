@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import './Register.scss';
-import {Container, Avatar, Button, CssBaseline, TextField } from "@material-ui/core";
+import { Container, Avatar, Button, CssBaseline, TextField } from "@material-ui/core";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { useHistory } from "react-router-dom";
 import * as EmailValidator from "email-validator";
@@ -9,22 +9,22 @@ function Register(props) {
   const history = useHistory();
   const { value, index, ...other } = props;
 
-  //STATES
-  const [user,setUser] = useState({
+  // STATES
+  const [user, setUser] = useState({
     fName: "",
     lName: "",
     username: "",
     password: ""
   });
 
-  const [formError,setFormError] = useState({
+  const [formError, setFormError] = useState({
     fName: null,
     lName: null,
     username: null,
     password: null
   });
 
-  const [returnMessage,setReturnMessage] = useState({
+  const [returnMessage, setReturnMessage] = useState({
     code: null,
     content: ""
   });
@@ -40,26 +40,26 @@ function Register(props) {
     });
   }
 
-  function validation(){
+  function validation() {
 
     let newError = {};
 
-    if(!user.fName){
+    if(!user.fName) {
       newError.fName = "Required";
     }
 
-    if(!user.lName){
+    if(!user.lName) {
       newError.lName = "Required";
     }
 
-    if(!user.username){
+    if(!user.username) {
       newError.username = "Required";
     }
     else if (!EmailValidator.validate(user.username)) {
       newError.username = "Invalid email address";
     }
 
-    if(!user.password){
+    if(!user.password) {
       newError.password = "Required";
     }
     else if (user.password.length < 3) {
@@ -74,7 +74,7 @@ function Register(props) {
 
   function performRegistration(event) {
     //validate form fields
-    if(!validation()){
+    if(!validation()) {
       event.preventDefault();
       return;
     }
@@ -83,8 +83,8 @@ function Register(props) {
     const requestOptions = {
       method: "POST",
       headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(user)
     };
