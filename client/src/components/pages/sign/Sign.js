@@ -6,6 +6,7 @@ import SwipeableViews from "react-swipeable-views";
 import {Tabs, Tab, AppBar, Paper} from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { useTheme } from '@material-ui/core/styles';
+import floralBottom from "../../../assets/svg/compositions/floral-bottom-composition.svg";
 
 function Sign(){
   const history = useHistory();
@@ -42,6 +43,12 @@ function Sign(){
 
   return (
     <Paper className="sign-container">
+      <div className="sign-container__decoration sign-container__decoration--top">
+        <img src={floralBottom} alt="floral decoration" />
+      </div>
+      <div className="sign-container__decoration sign-container__decoration--left">
+        <img src={floralBottom} alt="floral decoration" />
+      </div>
       <AppBar position="static" color="default">
         <Tabs
           value={tabIndex}

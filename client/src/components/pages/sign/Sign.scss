@@ -1,4 +1,22 @@
 .sign-container{
   width: 50rem;
-  margin: 2rem auto;
+  margin: 20rem auto;
+  position: relative;
+
+  &__decoration{
+    position: absolute;
+    z-index: -1;
+    width: 20rem;
+    height: 22rem;
+
+    &--top{
+      top: -10rem;
+      left: -1rem;
+    }
+    &--left{
+      transform: rotate(-90deg) scaleX(-1);
+      left:-10rem;
+      top:-1rem;
+    }
+  }
 }
