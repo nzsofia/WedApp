@@ -5,8 +5,7 @@ import Register from "./register/Register";
 import SwipeableViews from "react-swipeable-views";
 import {Tabs, Tab, AppBar, Paper} from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-import { useTheme } from '@material-ui/core/styles';
-import floralBottom from "../../../assets/svg/compositions/floral-bottom-composition.svg";
+import floralBottom from "../../../assets/svg/compositions/floral-bottom-composition-2.svg";
 
 function Sign(){
   const history = useHistory();
