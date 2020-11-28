@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import './Gifts.scss';
 import { useHistory } from "react-router-dom";
 import NavigationBar from "../../shared/navigation-bar/NavigationBar";
@@ -93,7 +93,7 @@ function Gifts() {
                         } />
             <CardMedia className="gift__img" image={gift.imgURL} />
             <CardContent>
-              <Typography component="p" className="gift_description">{gift.description}</Typography>
+              <Typography component="p" className="gift__description">{gift.description}</Typography>
             </CardContent>
             <CardActions disableSpacing>
               <Button disabled={!!gift.userId}

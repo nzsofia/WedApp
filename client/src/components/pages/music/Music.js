@@ -158,8 +158,8 @@ function Music() {
                   <IconButton edge="end"
                               aria-label="Like"
                               onClick={(e) => changeLikeOnTrack(e, track._id)}>
-                    <Badge badgeContent={track.users.length} color="secondary">
-                      {track.like ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+                    <Badge className="track-list__item__like__count" badgeContent={track.users.length} color="secondary">
+                      {track.like ? <FavoriteIcon className="track-list__item__like" /> : <FavoriteBorderIcon className="track-list__item__like" />}
                     </Badge>
                   </IconButton>
                 </ListItemSecondaryAction>
