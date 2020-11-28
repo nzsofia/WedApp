@@ -44,7 +44,7 @@ function NavigationBar() {
             <Link className="nav-bar__button" to="/music">Music</Link>
           </div>
           <div className="spacing"></div>
-          <IconButton onClick={logout} style={{ color: "currentcolor" }}>
+          <IconButton className="nav-bar__logout" onClick={logout} style={{ color: "currentcolor" }}>
             <ExitToApp />
           </IconButton>
         </Toolbar>
