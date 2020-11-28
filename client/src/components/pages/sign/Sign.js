@@ -6,6 +6,7 @@ import SwipeableViews from "react-swipeable-views";
 import {Tabs, Tab, AppBar, Paper} from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import floralBottom from "../../../assets/svg/compositions/floral-bottom-composition-2.svg";
+import * as request from "../../../services/request";
 
 function Sign() {
   const history = useHistory();
@@ -17,15 +18,7 @@ function Sign() {
   }
 
   function authenticate() {
-    fetch("http://localhost:9000/", {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(res => res.json())
+    request.get(`${request.URL}/`)
       .then(res => {
         // if alredy logged in, load home page
         if (res.message.code === 200) {

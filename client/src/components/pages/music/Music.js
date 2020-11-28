@@ -10,6 +10,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import * as request from "../../../services/request";
 
 function Music() {
   const history = useHistory();
@@ -29,15 +30,7 @@ function Music() {
   }
 
   function getTrackList() {
-    fetch("http://localhost:9000/music", {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(res => res.json())
+    request.get(`${request.URL}/music`)
       .then(res => {
         // if authentication failed redirect to login page
         if (res.message.code === 401) {
@@ -58,18 +51,7 @@ function Music() {
       // TODO popup like song below message
       return;
 
-    const requestOptions = {
-      method: "POST",
-      withCredentials: true,
-      credentials: 'include',
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(newTrack)
-    };
-    fetch("http://localhost:9000/music", requestOptions)
-      .then(res => res.json())
+    request.post(`${request.URL}/music`, newTrack)
       .then(res => {
         // if authentication failed redirect to login page
         if (res.message.code === 401) {
@@ -86,18 +68,7 @@ function Music() {
   }
 
   function changeLikeOnTrack(event, trackId) {
-    const requestOptions = {
-      method: "POST",
-      withCredentials: true,
-      credentials: 'include',
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({trackId: trackId})
-    };
-    fetch("http://localhost:9000/music/vote", requestOptions)
-      .then(res => res.json())
+    request.post(`${request.URL}/music/vote`, {trackId: trackId})
       .then(res => {
         // if authentication failed redirect to login page
         if (res.message.code === 401) {

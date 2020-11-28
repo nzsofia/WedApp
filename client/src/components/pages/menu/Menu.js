@@ -2,20 +2,13 @@ import React, { useEffect } from "react";
 import './Menu.scss';
 import { useHistory } from "react-router-dom";
 import NavigationBar from "../../shared/navigation-bar/NavigationBar";
+import * as request from "../../../services/request";
 
 function Menu() {
   const history = useHistory();
 
   function authenticate() {
-    fetch("http://localhost:9000/menu", {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(res => res.json())
+    request.get(`${request.URL}/menu`)
       .then(res => {
         // if authentication failed redirect to login page
         if (res.message.code === 401) {

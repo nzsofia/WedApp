@@ -6,7 +6,7 @@ import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRoun
 import { InputLabel, FormHelperText, FormControl, Select, Button, TextField, Fab, Paper, Grid, Tooltip  } from "@material-ui/core";
 import NavigationBar from "../../shared/navigation-bar/NavigationBar";
 import grass1 from "../../../assets/svg/grass-1.svg";
-
+import * as request from "../../../services/request";
 
 function Home() {
   const history = useHistory();
@@ -23,15 +23,7 @@ function Home() {
   const [hasResponded, setHasResponded] = useState(false);
 
   function authenticate() {
-    fetch("http://localhost:9000/", {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(res => res.json())
+    request.get(`${request.URL}/`)
       .then(res => {
         // if authentication failed redirect to login page
         if (res.message.code === 401) {
@@ -76,21 +68,9 @@ function Home() {
       rsvp: response.rsvp,
       allergies: response.allergies,
       plusPeople: plusPeople
-    }
-
-    const requestOptions = {
-      method: "POST",
-      withCredentials: true,
-      credentials: 'include',
-      headers:{
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(responseData)
     };
 
-    fetch("http://localhost:9000/", requestOptions)
-      .then(res => res.json())
+    request.post(`${request.URL}/`, responseData)
       .then(res => {
         // if response was saved, notify user
         if (res.message.code === 200) {
@@ -131,10 +111,10 @@ function Home() {
         <Paper className="response-form-background">
           <Grid container spacing={2} justify="center" alignItems="center" direction="column">
             <Grid item>
-                <h1>RSVP</h1>
+              <h1>RSVP</h1>
             </Grid>
             <Grid item>
-                <p>Please RSVP here as soon as possible!</p>
+              <p>Please RSVP here as soon as possible!</p>
             </Grid>
             <Grid item>
               <form>
@@ -165,22 +145,22 @@ function Home() {
                   </Tooltip>
                   {plusPeople.map((plusPerson, i) => {
                     return(
-                      <Grid item container direction="row" spacing={2}>
+                      <Grid item container direction="row" spacing={2} key={"plusPerson" + i}>
                         <Grid item xs={12} sm={6}>
                           <TextField id="fNamePP"
                                    label="First Name"
                                    variant="outlined"
                                    required
-                                   onChange={e => handleChangePlusPeople(e,i)}
+                                   onChange={e => handleChangePlusPeople(e, i)}
                                    value={plusPerson.fNamePP}
                                    fullWidth />
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                         <TextField id="lNamePP"
+                          <TextField id="lNamePP"
                                   label="Last Name"
                                   variant="outlined"
                                   required
-                                  onChange={e => handleChangePlusPeople(e,i)}
+                                  onChange={e => handleChangePlusPeople(e, i)}
                                   value={plusPerson.lNamePP}
                                   fullWidth />
                         </Grid>
@@ -188,7 +168,7 @@ function Home() {
                     );
                   })}
 
-                  { plusPeople.length < maxInput && //maybe it can be deactivated (appear grey) not removed
+                  {plusPeople.length < maxInput && //maybe it can be deactivated (appear grey) not removed
                     <Grid item className="add-container">
                       <Fab className="add-container__btn" size="small" color="secondary" aria-label="add" onClick={addPlusPerson}>
                         <AddCircleOutlineRoundedIcon />
@@ -196,24 +176,22 @@ function Home() {
                     </Grid>
                   }
 
+                  <Grid item>
+                    <TextField id="allergies"
+                             fullWidth
+                             multiline
+                             rows={4}
+                             label="Allergies"
+                             variant="outlined"
+                             onChange={handleChange}
+                             value={response.allergies} />
+                  </Grid>
 
-
-                <Grid item>
-                  <TextField id="allergies"
-                           fullWidth
-                           multiline
-                           rows={4}
-                           label="Allergies"
-                           variant="outlined"
-                           onChange={handleChange}
-                           value={response.allergies} />
-                </Grid>
-
-                <Grid item className="submit-response-btn-container">
-                  <Button className="submit-response-btn" fullWidth variant="contained" color="secondary" onClick={sendResponse}>
-                   Submit
-                  </Button>
-                </Grid>
+                  <Grid item className="submit-response-btn-container">
+                    <Button className="submit-response-btn" fullWidth variant="contained" color="secondary" onClick={sendResponse}>
+                      Submit
+                    </Button>
+                  </Grid>
 
                 </Grid>
               </form>
