@@ -3,7 +3,7 @@
 .nav-bar {
   background-color: $color-background;
   position: relative;
-  color: rgba($color-secondary, 0.8);
+  color: rgba($light-grey, 0.8);
 
   &__navigation {
     position: absolute;
@@ -15,7 +15,7 @@
     font-size: 1.3rem;
     font-weight: 400;
     text-transform: uppercase;
-    color: rgba($color-secondary, 0.6);
+    color: rgba($light-grey, 0.6);
     text-decoration: none;
     display: inline-block;
     margin: 20px;
@@ -25,7 +25,7 @@
 
     &:hover {
       text-decoration: none;
-      color: $color-secondary;
+      color: $light-grey;
       transform: translateY(-2px);
       text-shadow: $text-shadow-hover;
     }

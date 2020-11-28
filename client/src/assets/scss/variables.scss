@@ -1,23 +1,15 @@
 // COLORS
-// TODO
-$color-primary: #827043;
-$color-secondary: #6C7170;
-$color-tertiary: #827043;
+$name-text: #8d7141;
 
+$light-grey: #6C7170;
 $dark-grey: rgb(30, 30, 30);
 
 $text-shadow: 0 5px 10px rgba($dark-grey, 0.2);
 $text-shadow-hover: 0 8px 16px rgba($dark-grey, 0.3);
 
-$color-primary-font: #FFFFFF;
-$color-primary-background: #21825C;
+$white: #FFFFFF;
 
 $color-background: #FBFAF7;
-
-span[class$="-colorPrimary"] {
-  color: $color-primary-font;
-  background-color: $color-primary-background;
-}
 
 // FONT
 $default-font-size: 1.6rem;

@@ -1,20 +1,21 @@
-.sign-container{
+.sign-container {
   width: 50rem;
   margin: 10rem auto;
   position: relative;
 
-  &__decoration{
+  &__decoration {
     position: absolute;
     z-index: -1;
     width: 20rem;
     height: 22rem;
 
-    &--top{
+    &--top {
       top: -7rem;
       left: -3rem;
       transform: rotate(5deg)
     }
-    &--left{
+
+    &--left {
       transform: rotate(-96deg) scaleX(-1);
       left:-6rem;
       top:-4rem;

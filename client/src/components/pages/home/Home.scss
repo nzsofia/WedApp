@@ -9,14 +9,14 @@
   .names {
     @include center-horizontal-vertical;
     font-size: 4.2vw;
-    color: $color-primary;
+    color: $name-text;
     top: 40%;
   }
 
   .date {
     @include center-horizontal-vertical;
     font-size: 1.9vw;
-    color: $color-secondary;
+    color: $light-grey;
     top: 54%;
 
     &--1 {
@@ -32,7 +32,9 @@
     }
   }
 
-  .header-rsvp-button{
+  .header-rsvp-button {
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: .3rem;
     position: absolute;
     bottom: 9vw;
     left: 50%;
@@ -42,7 +44,7 @@
   }
 }
 
-.response-container{
+.response-container {
   position: relative;
   overflow: hidden;
   margin-top: -0.5vw;
@@ -53,10 +55,12 @@
     top: 0.3vw;
     width: 26vw;
     height: 17vw;
+
     &--left {
       left: -13.3vw;
       transform: rotate(83deg) scale(1,-1);
     }
+
     &--right {
       right: -12.3vw;
       transform: rotate(90deg);
@@ -64,29 +68,31 @@
   }
 }
 
-.response-form-background{
+.response-form-background {
   max-width: 50rem;
   margin: 2rem auto;
   padding: 1rem;
 }
 
-.plus-people-header{
+.plus-people-header {
   padding-left: 1rem;
 }
 
-.add-container{
+.add-container {
   position: relative;
-  &__btn{
+
+  &__btn {
     position: absolute;
     top: -3rem;
     right: 0;
+    font-size: 2.5rem;
   }
 }
 
-.submit-response-btn-container{
+.submit-response-btn-container {
   text-align: center;
 }
 
-.submit-response-btn{
+.submit-response-btn {
   max-width: 20rem;
 }

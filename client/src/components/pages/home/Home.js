@@ -117,7 +117,7 @@ function Home() {
         <div className="date date--2">SZEPT</div>
         <div className="date date--3">18</div>
         {!hasResponded && <Button className="header-rsvp-button" variant="contained" color="secondary" href="#response">
-         RSVP
+         RSVP CARD
         </Button>}
       </header>
       {hasResponded ? <div><h1>Thank you for your response!</h1></div> :

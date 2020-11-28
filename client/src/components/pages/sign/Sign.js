@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import './Sign.scss';
 import Login from "./login/Login";
 import Register from "./register/Register";
@@ -7,15 +7,14 @@ import {Tabs, Tab, AppBar, Paper} from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import floralBottom from "../../../assets/svg/compositions/floral-bottom-composition-2.svg";
 
-function Sign(){
+function Sign() {
   const history = useHistory();
   const [tabIndex, setTabIndex] = useState(0);
-  const theme = useTheme();
 
   function handleTabChange (event, newIndex) {
     console.log(newIndex);
     setTabIndex(newIndex);
-  };
+  }
 
   function authenticate() {
     fetch("http://localhost:9000/", {
@@ -39,7 +38,6 @@ function Sign(){
   // check if user is already logged in
   useEffect(authenticate, []);
 
-
   return (
     <Paper className="sign-container">
       <div className="sign-container__decoration sign-container__decoration--top">
@@ -61,9 +59,7 @@ function Sign(){
           <Tab label="Register" id="register" aria-controls="register-tab" />
         </Tabs>
       </AppBar>
-      <SwipeableViews
-        index={tabIndex}
-      >
+      <SwipeableViews index={tabIndex}>
         <Login value={tabIndex} index={0} />
         <Register value={tabIndex} index={1} />
       </SwipeableViews>

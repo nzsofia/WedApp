@@ -6,38 +6,41 @@ import Gifts from "./components/pages/gifts/Gifts";
 import Menu from "./components/pages/menu/Menu";
 import Music from "./components/pages/music/Music";
 import Sign from "./components/pages/sign/Sign";
-import { StylesProvider } from "@material-ui/core/styles";
+import { StylesProvider, ThemeProvider } from "@material-ui/core/styles";
+import theme from "./Theme";
 import './App.scss';
 
 function App() {
 
   return (
     <StylesProvider injectFirst>
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/guests">
-            <Guests />
-          </Route>
-          <Route path="/gifts">
-            <Gifts />
-          </Route>
-          <Route path="/menu">
-            <Menu />
-          </Route>
-          <Route path="/music">
-            <Music />
-          </Route>
-          <Route path="/sign">
-            <Sign />
-          </Route>
-          <Route path="*">
-            <Redirect to="/" />
-          </Route>
-        </Switch>
-      </Router>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/guests">
+              <Guests />
+            </Route>
+            <Route path="/gifts">
+              <Gifts />
+            </Route>
+            <Route path="/menu">
+              <Menu />
+            </Route>
+            <Route path="/music">
+              <Music />
+            </Route>
+            <Route path="/sign">
+              <Sign />
+            </Route>
+            <Route path="*">
+              <Redirect to="/" />
+            </Route>
+          </Switch>
+        </Router>
+      </ThemeProvider>
     </StylesProvider>
   );
 }
