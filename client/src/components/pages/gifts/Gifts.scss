@@ -7,6 +7,7 @@
 
 .gift {
   width: 24rem;
+  height: 40rem;
   display: inline-block;
   margin-right: 3.2rem;
   margin-bottom: 1.6rem;
@@ -14,44 +15,45 @@
 
   &__title span {
     font-weight: 600;
+    text-transform: capitalize;
   }
 
   &__avatar {
     background-color: transparent;
 
-    .MuiAvatar-img {
-      object-fit: inherit !important;
+    img {
+      object-fit: inherit;
     }
 
     &--1 {
       transform: rotate(-45deg);
 
-      .MuiAvatar-img {
-        width: 140% !important;
+      img {
+        width: 140%;
       }
     }
 
     &--2 {
       transform: rotate(20deg);
 
-      .MuiAvatar-img {
-        width: 115% !important;
+      img {
+        width: 115%;
       }
     }
 
     &--3 {
       transform: rotate(-80deg);
 
-      .MuiAvatar-img {
-        width: 120% !important;
+      img {
+        width: 120%;
       }
     }
 
     &--4 {
       transform: rotate(-60deg);
 
-      .MuiAvatar-img {
-        width: 110% !important;
+      img {
+        width: 110%;
       }
     }
   }
@@ -64,11 +66,13 @@
     margin: 0 auto;
   }
 
-  &__description {}
+  &__description {
+    font-style: italic;
+  }
 
   &__button {
-    //position: absolute !important;
-    //right: .5rem;
-    //bottom: .5rem;
+    position: absolute;
+    right: .8rem;
+    bottom: .8rem;
   }
 }

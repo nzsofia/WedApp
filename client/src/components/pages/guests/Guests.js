@@ -5,21 +5,14 @@ import NavigationBar from "../../shared/navigation-bar/NavigationBar";
 import { List } from "@material-ui/core";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import * as request from "../../../services/request";
 
 function Guests() {
   const history = useHistory();
   const [guests, setGuests] = useState({list: []});
 
   function getGuests() {
-    fetch("http://localhost:9000/guests", {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(res => res.json())
+    request.get(`${request.URL}/guests`)
       .then(res => {
         // if authentication failed redirect to login page
         if (res.message.code === 401) {

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import './Login.scss';
-import {Container, Avatar, Button, CssBaseline, TextField  } from "@material-ui/core";
+import { Container, Avatar, Button, CssBaseline, TextField } from "@material-ui/core";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { useHistory } from "react-router-dom";
+import * as request from "../../../../services/request";
 
 function Login(props) {
   const history = useHistory();
@@ -31,19 +32,7 @@ function Login(props) {
 
   function performLogin(event) {
     // check in database if email-password pair is correct
-    const requestOptions = {
-      method: "POST",
-      withCredentials: true,
-      credentials: 'include',
-      headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user)
-    };
-
-    fetch("http://localhost:9000/login", requestOptions)
-      .then(res => res.json())
+    request.post(`${request.URL}/login`, user)
       .then(res => {
         setReturnMessage(res.message);
 

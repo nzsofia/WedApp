@@ -7,7 +7,7 @@ import Menu from "./components/pages/menu/Menu";
 import Music from "./components/pages/music/Music";
 import Sign from "./components/pages/sign/Sign";
 import { StylesProvider, ThemeProvider } from "@material-ui/core/styles";
-import theme from "./Theme";
+import theme from "./utility/theme";
 import './App.scss';
 
 function App() {
