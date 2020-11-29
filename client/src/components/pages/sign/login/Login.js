@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import './Login.scss';
+import ErrorMessage from "../../../shared/error-message/ErrorMessage.js"
 import { Container, Avatar, Button, CssBaseline, TextField } from "@material-ui/core";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { useHistory } from "react-router-dom";
+import * as EmailValidator from "email-validator";
 import * as request from "../../../../services/request";
 
 function Login(props) {
@@ -12,6 +14,11 @@ function Login(props) {
   const [user,setUser] = useState({
     username: "",
     password: ""
+  });
+
+  const [formError, setFormError] = useState({
+    username: null,
+    password: null
   });
 
   const [returnMessage,setReturnMessage] = useState({
@@ -30,7 +37,38 @@ function Login(props) {
     });
   }
 
+  function validation() {
+
+    let newError = {};
+
+    if(!user.username) {
+      newError.username = "Required";
+    }
+    else if (!EmailValidator.validate(user.username)) {
+      newError.username = "Invalid email address";
+    }
+
+    if(!user.password) {
+      newError.password = "Required";
+    }
+    else if (user.password.length < 3) {
+      newError.password = "Password must be at least 3 characters long";
+    }
+
+    setFormError(newError);
+    //check if there were any errors
+    if(Object.keys(newError).length === 0) return true;
+    return false;
+  }
+
   function performLogin(event) {
+
+    //validate form fields
+    if(!validation()) {
+      event.preventDefault();
+      return;
+    }
+
     // check in database if email-password pair is correct
     request.post(`${request.URL}/login`, user)
       .then(res => {
@@ -63,6 +101,8 @@ function Login(props) {
           <Avatar className="login-avatar">
             <LockOutlinedIcon />
           </Avatar>
+          {returnMessage.code && returnMessage.code !== 200 &&
+            <ErrorMessage>{returnMessage.content}</ErrorMessage>}
           <form className="login-form" noValidate>
             <TextField
               variant="outlined"
@@ -76,6 +116,8 @@ function Login(props) {
               autoFocus
               onChange={handleChange}
               value={user.username}
+              error={formError.username}
+              helperText={formError.username}
             />
             <TextField
               variant="outlined"
@@ -88,6 +130,8 @@ function Login(props) {
               autoComplete="current-password"
               onChange={handleChange}
               value={user.password}
+              error={formError.password}
+              helperText={formError.password}
             />
             <Button
               type="button"
