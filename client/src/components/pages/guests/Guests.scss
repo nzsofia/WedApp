@@ -12,13 +12,18 @@
     transform: translate(30%, -45%) rotate(160deg);
     background: url("../../../assets/svg/compositions/floral-center-composition.svg") no-repeat center center;
 
-    @include respond(phone) {
-      display: none;
-    }
-
     @include respond(big-desktop) {
       width: 70vw;
       height: 70vh;
+    }
+  }
+
+  .filter-container{
+    display: inline-flex;
+    margin: 2rem 3.5rem 2rem;
+
+    &__text{
+      margin: auto 2rem;
     }
   }
 

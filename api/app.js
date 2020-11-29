@@ -33,7 +33,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, '../client/build')));
+app.use(express.static(path.join(__dirname, './build')));
 
 // Session and authentication
 app.use(session({
@@ -55,7 +55,7 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.use('/', indexRouter);
+app.use('/home', indexRouter);
 app.use("/guests", guestsRouter);
 app.use("/register", registerRouter);
 app.use("/login", loginRouter);
@@ -67,7 +67,7 @@ app.use("/menu", menuRouter);
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname+'../client/build/index.html'));
+  res.sendFile(path.join(__dirname+'./build/index.html'));
 });
 
 // catch 404 and forward to error handler

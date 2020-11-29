@@ -34,7 +34,7 @@ function Home() {
 
 
   function authenticate() {
-    request.get(`${request.URL}/`)
+    request.get("/home")
       .then(res => {
         setReturnMessage(res.message);
 
@@ -105,7 +105,7 @@ function Home() {
       plusPeople: plusPeople
     };
 
-    request.post("/", responseData)
+    request.post("/home", responseData)
       .then(res => {
         setReturnMessage(res.message);
 
