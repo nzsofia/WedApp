@@ -37,14 +37,16 @@ function guestList(req, res) {
 
 function makeDummy(req, res) {
   new Guest({
-    fName: "Levente",
-    lName: "Vági",
-    userId: null
+    fName: "Sarah",
+    lName: "Smith",
+    userId: null,
+    plusPeopleNum: 3
   }).save();
   new Guest({
-    fName: "Zsófi",
-    lName: "Németh",
-    userId: null
+    fName: "Molly",
+    lName: "Stuart",
+    userId: null,
+    plusPeopleNum: 2
   }).save();
   new Guest({
     fName: "Bruce",
@@ -52,12 +54,16 @@ function makeDummy(req, res) {
     userId: null
   }).save();
   new Guest({
-    fName: "Mitya",
-    lName: "Vághy",
-    userId: null
+    fName: "John",
+    lName: "Snow",
+    userId: null,
+    plusPeopleNum: 0
   }).save();
 
-  res.send("Guests saved");
+  res.send({
+      guestList: [],
+      message: {code: 200, content: "Everything ok."}
+  });
 }
 
 export { guestList, makeDummy };

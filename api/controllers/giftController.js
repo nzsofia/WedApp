@@ -37,12 +37,12 @@ function reserveGift(req, res) {
 function makeDummy(req, res) {
   new WeddingGift({
     name: "Cute Puppy",
-    description: "A cute Border Collie puppy for Zsófi.",
+    description: "A cute Border Collie puppy.",
     imgURL: "https://www.animalfactsencyclopedia.com/images/315xNxborder-collie-puppy.jpg.pagespeed.ic.dMdaUHC-d-.jpg"
   }).save();
   new WeddingGift({
     name: "DJI Mavic Air Quadrocopter",
-    description: "A drone for Levi.",
+    description: "An awesome drone with 4K camera.",
     imgURL: "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6194/6194019_sd.jpg"
   }).save();
   res.send({message: {code: 200, content: "Example gifts saved!"}});

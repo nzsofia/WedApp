@@ -7,6 +7,8 @@
 import app from "../app.js";
 import debugFunc from "debug";
 import http from "http";
+import dotenv from 'dotenv';
+dotenv.config();
 
 const debug = debugFunc('api:server');
 

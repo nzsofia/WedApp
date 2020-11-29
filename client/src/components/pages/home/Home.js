@@ -13,7 +13,7 @@ import * as request from "../../../services/request";
 function Home() {
   const history = useHistory();
   const rsvpValues = ["Yes, I'm coming to the wedding! :)", "No, I cannot come to the wedding! :("];
-  const namesText = "ZSÓFI & LEVI";
+  const namesText = "ROSE & LEWIS";
 
   // STATES
   const [response, setResponse] = useState({
@@ -131,8 +131,8 @@ function Home() {
         <img src={homePage} alt="Home design"/>
         <div className="names">{namesText}</div>
         <div className="date date--1">2021</div>
-        <div className="date date--2">SZEPT</div>
-        <div className="date date--3">18</div>
+        <div className="date date--2">OCT</div>
+        <div className="date date--3">16</div>
         {!hasResponded && <Button className="header-rsvp-button" variant="contained" color="secondary" href="#response">
          RSVP CARD
         </Button>}

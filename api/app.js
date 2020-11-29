@@ -4,6 +4,8 @@ import path, { dirname } from "path";
 import { fileURLToPath } from "url";
 import logger from "morgan";
 import cors from "cors";
+import dotenv from 'dotenv';
+dotenv.config();
 
 // DB and Passport authentication
 import mongoose from "mongoose";
@@ -26,7 +28,7 @@ const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 //configurations
-app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
+app.use(cors({credentials: true, origin: process.env.CLIENT_URL}));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -34,7 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Session and authentication
 app.use(session({
-  secret: "I hope this will work.",
+  secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false, maxAge: ((1000 * 60) * 60) } // 1 hour
@@ -43,7 +45,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Initialize database connection
-mongoose.connect('mongodb://localhost:27017/weddingDB', {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true});
+mongoose.connect(process.env.DB_URL, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
