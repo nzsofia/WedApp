@@ -5,6 +5,8 @@
   position: relative;
   background-color: $color-background;
   font-family: 'Antic Didone';
+  max-width: 100vw;
+  height: calc(62vw - 4rem);
 
   .names {
     @include center-horizontal-vertical;
