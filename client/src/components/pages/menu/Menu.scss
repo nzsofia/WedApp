@@ -1,0 +1,44 @@
+@import "src/assets/scss/mixins";
+@import "src/assets/scss/variables";
+
+.menu-container {
+  width: 60rem;
+  margin: 5rem auto;
+  position: relative;
+}
+
+.menu {
+  @include center-horizontal-vertical;
+  width: 50%;
+  text-align: center;
+
+  &__title {
+    color: $name-text;
+    font-weight: 300;
+    margin-bottom: 5rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid rgba($name-text, .6);
+  }
+
+  &__dish {
+
+    &:not(:last-child) {
+      margin-bottom: 5rem;
+    }
+
+    &__title {
+      color: $name-text;
+      text-transform: uppercase;
+      letter-spacing: .1rem;
+      font-size: 2.2rem;
+      font-weight: 400;
+      font-style: italic;
+    }
+
+    &__description {
+      margin-top: 1.3rem;
+      color: $light-grey;
+      font-style: italic;
+    }
+  }
+}
