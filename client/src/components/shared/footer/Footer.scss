@@ -1,0 +1,23 @@
+@import "src/assets/scss/variables";
+
+.copyright {
+  margin-bottom: 1rem;
+  text-align: center;
+  color: $light-grey;
+}
+
+.designs {
+  text-align: center;
+  font-size: 1rem;
+  font-style: italic;
+  color: $light-grey;
+
+  &:last-child {
+    margin-bottom: 2rem;
+  }
+
+  &__link {
+    color: currentColor;
+    text-decoration: none;
+  }
+}

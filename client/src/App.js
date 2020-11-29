@@ -6,6 +6,7 @@ import Gifts from "./components/pages/gifts/Gifts";
 import Menu from "./components/pages/menu/Menu";
 import Music from "./components/pages/music/Music";
 import Sign from "./components/pages/sign/Sign";
+import Footer from "./components/shared/footer/Footer";
 import { StylesProvider, ThemeProvider } from "@material-ui/core/styles";
 import theme from "./utility/theme";
 import './App.scss';
@@ -40,6 +41,7 @@ function App() {
             </Route>
           </Switch>
         </Router>
+        <Footer />
       </ThemeProvider>
     </StylesProvider>
   );
