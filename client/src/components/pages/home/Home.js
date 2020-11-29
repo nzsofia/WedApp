@@ -105,7 +105,7 @@ function Home() {
       plusPeople: plusPeople
     };
 
-    request.post(`${request.URL}/`, responseData)
+    request.post("/", responseData)
       .then(res => {
         setReturnMessage(res.message);
 

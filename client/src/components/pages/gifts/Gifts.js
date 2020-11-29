@@ -15,7 +15,7 @@ function Gifts() {
   const [gifts, setGifts] = useState({list: []});
 
   function getGiftList() {
-    request.get(`${request.URL}/gifts`)
+    request.get("/gifts")
       .then(res => {
         //if authentication failed redirect to login page
         if (res.message.code === 401) {

@@ -30,7 +30,7 @@ function Music() {
   }
 
   function getTrackList() {
-    request.get(`${request.URL}/music`)
+    request.get("/music")
       .then(res => {
         // if authentication failed redirect to login page
         if (res.message.code === 401) {
@@ -51,7 +51,7 @@ function Music() {
       // TODO popup like song below message
       return;
 
-    request.post(`${request.URL}/music`, newTrack)
+    request.post("/music", newTrack)
       .then(res => {
         // if authentication failed redirect to login page
         if (res.message.code === 401) {
@@ -68,7 +68,7 @@ function Music() {
   }
 
   function changeLikeOnTrack(event, trackId) {
-    request.post(`${request.URL}/music/vote`, {trackId: trackId})
+    request.post("/music/vote", {trackId: trackId})
       .then(res => {
         // if authentication failed redirect to login page
         if (res.message.code === 401) {

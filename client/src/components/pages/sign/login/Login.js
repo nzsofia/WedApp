@@ -70,7 +70,7 @@ function Login(props) {
     }
 
     // check in database if email-password pair is correct
-    request.post(`${request.URL}/login`, user)
+    request.post("/login", user)
       .then(res => {
         setReturnMessage(res.message);
 

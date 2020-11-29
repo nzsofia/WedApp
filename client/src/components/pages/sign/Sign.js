@@ -18,7 +18,7 @@ function Sign() {
   }
 
   function authenticate() {
-    request.get(`${request.URL}/`)
+    request.get("/")
       .then(res => {
         // if alredy logged in, load home page
         if (res.message.code === 200) {

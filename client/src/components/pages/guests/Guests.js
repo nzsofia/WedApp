@@ -12,7 +12,7 @@ function Guests() {
   const [guests, setGuests] = useState({list: []});
 
   function getGuests() {
-    request.get(`${request.URL}/guests`)
+    request.get("/guests")
       .then(res => {
         // if authentication failed redirect to login page
         if (res.message.code === 401) {

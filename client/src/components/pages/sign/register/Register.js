@@ -90,7 +90,7 @@ function Register(props) {
       body: JSON.stringify(user)
     };
 
-    fetch("http://localhost:9000/register", requestOptions)
+    fetch("/register", requestOptions)
       .then(res => res.json())
       .then(res => {
         setReturnMessage(res.message);

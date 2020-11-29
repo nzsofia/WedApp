@@ -11,7 +11,7 @@ function NavigationBar() {
   const history = useHistory();
 
   function logout(event) {
-    fetch("http://localhost:9000/logout", {
+    fetch("/logout", {
       method: "GET",
       credentials: "include",
       headers: {

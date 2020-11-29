@@ -9,7 +9,7 @@ function Menu() {
   const history = useHistory();
 
   function authenticate() {
-    request.get(`${request.URL}/menu`)
+    request.get("/menu")
       .then(res => {
         // if authentication failed redirect to login page
         if (res.message.code === 401) {
