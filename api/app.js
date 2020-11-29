@@ -33,6 +33,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../client/build')));
 
 // Session and authentication
 app.use(session({
@@ -62,6 +63,12 @@ app.use("/music", musicRouter);
 app.use("/gifts", giftsRouter);
 app.use("/logout", logoutRouter);
 app.use("/menu", menuRouter);
+
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'../client/build/index.html'));
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
