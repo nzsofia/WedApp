@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import './Register.scss';
-import { Container, Avatar, Button, CssBaseline, TextField, Typography } from "@material-ui/core";
+import ErrorMessage from "../../../shared/error-message/ErrorMessage.js"
+import { Container, Avatar, Button, CssBaseline, TextField } from "@material-ui/core";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import WarningIcon from '@material-ui/icons/Warning';
 import { useHistory } from "react-router-dom";
 import * as EmailValidator from "email-validator";
 
@@ -123,10 +123,7 @@ function Register(props) {
             <LockOutlinedIcon />
           </Avatar>
           {returnMessage.code && returnMessage.code !== 200 &&
-            <div className="register-error-message-container">
-              <WarningIcon className="warning-icon"/>
-              <Typography variant="h5" color="error" className="message">{returnMessage.content}</Typography>
-            </div>}
+            <ErrorMessage>{returnMessage.content}</ErrorMessage>}
           <form className="register-form" noValidate>
             <TextField
               variant="outlined"

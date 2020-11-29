@@ -1,0 +1,15 @@
+
+.error-message-container{
+  background-color: #fcedf0;
+  display: inline-flex;
+  border: 1px solid lightgrey;
+  padding: 1rem;
+  width: 100%;
+
+  .warning-icon{
+    font-size: 3rem;
+  }
+  .message{
+    margin: auto 1rem;
+  }
+}

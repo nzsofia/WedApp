@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import homePage from "../../../assets/svg/compositions/home_page.svg";
 import './Home.scss';
 import { useHistory } from "react-router-dom";
+import ErrorMessage from "../../shared/error-message/ErrorMessage.js"
 import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import { InputLabel, FormHelperText, FormControl, Select, Button, TextField, Fab, Paper, Grid, Tooltip  } from "@material-ui/core";
 import NavigationBar from "../../shared/navigation-bar/NavigationBar";
 import grass1 from "../../../assets/svg/grass-1.svg";
@@ -13,18 +15,29 @@ function Home() {
   const rsvpValues = ["Yes, I'm coming to the wedding! :)", "No, I cannot come to the wedding! :("];
   const namesText = "ZSÓFI & LEVI";
 
-  // State variables
+  // STATES
   const [response, setResponse] = useState({
       rsvp: null,
       allergies: ""
   });
+  const [formError, setFormError] = useState({
+    rsvp: null
+  });
+  const [returnMessage, setReturnMessage] = useState({
+    code: null,
+    content: ""
+  });
+
   const [plusPeople, setPlusPeople] = useState([{key: 0, fNamePP: "", lNamePP: ""}]);
   const [maxInput, setMaxInput] = useState(1);
   const [hasResponded, setHasResponded] = useState(false);
 
+
   function authenticate() {
     request.get(`${request.URL}/`)
       .then(res => {
+        setReturnMessage(res.message);
+
         // if authentication failed redirect to login page
         if (res.message.code === 401) {
           history.push("/sign");
@@ -42,20 +55,20 @@ function Home() {
   }
 
   function handleChange(event) {
-    const {id, value} = event.target;
+    const {name, value} = event.target;
 
     setResponse(prevResponse => {
       return {
         ...prevResponse,
-        [id]: value
+        [name]: value
       };
     });
   }
 
   function handleChangePlusPeople(event, index) {
-    const {id, value} = event.target;
+    const {name, value} = event.target;
     const tempList = [...plusPeople];
-    tempList[index][id] = value;
+    tempList[index][name] = value;
     setPlusPeople(tempList);
   }
 
@@ -63,7 +76,29 @@ function Home() {
     setPlusPeople([...plusPeople, {key: plusPeople.length, fNamePP: "", lNamePP: ""}]);
   }
 
+  function validation() {
+
+    let newError = {};
+
+    if(!response.rsvp) {
+      console.log(response);
+      newError.rsvp = "Required";
+    }
+
+    setFormError(newError);
+    //check if there were any errors
+    if(Object.keys(newError).length === 0) return true;
+    return false;
+  }
+
   function sendResponse(event) {
+
+    //validate form fields
+    if(!validation()) {
+      event.preventDefault();
+      return;
+    }
+
     const responseData = {
       rsvp: response.rsvp,
       allergies: response.allergies,
@@ -72,14 +107,16 @@ function Home() {
 
     request.post(`${request.URL}/`, responseData)
       .then(res => {
+        setReturnMessage(res.message);
+
         // if response was saved, notify user
         if (res.message.code === 200) {
           setHasResponded(true);
         }
         else {
-          // TODO: pop-up notification or something
+          //error message is shown in form
+          event.preventDefault();
         }
-        event.preventDefault();
       })
       .catch(err => err);
   }
@@ -100,27 +137,42 @@ function Home() {
          RSVP CARD
         </Button>}
       </header>
-      {hasResponded ? <div><h1>Thank you for your response!</h1></div> :
+
       <div id="response" className="response-container">
+
         <div className="response-container__decoration response-container__decoration--left">
           <img src={grass1} alt="grass decoration"/>
         </div>
         <div className="response-container__decoration response-container__decoration--right">
           <img src={grass1} alt="grass decoration"/>
         </div>
+
         <Paper className="response-form-background">
+
+          {hasResponded ?
+          <div className = "response-form-background__responded">
+            <h1>Thank you for your response!</h1>
+            <FavoriteIcon className="heart-icon"/>
+          </div> :
+
           <Grid container spacing={2} justify="center" alignItems="center" direction="column">
+
             <Grid item>
               <h1>RSVP</h1>
             </Grid>
             <Grid item>
               <p>Please RSVP here as soon as possible!</p>
             </Grid>
+            {returnMessage.code && returnMessage.code !== 200 &&
+              <Grid item>
+                <ErrorMessage>{returnMessage.content}</ErrorMessage>
+              </Grid>}
+
             <Grid item>
               <form>
                 <Grid container direction="column" spacing={2}>
                   <Grid item>
-                    <FormControl fullWidth required variant="outlined">
+                    <FormControl fullWidth required variant="outlined" error={formError.rsvp}>
                       <InputLabel htmlFor="rsvp-response">Are you coming to the wedding?</InputLabel>
                       <Select
                         native
@@ -136,7 +188,7 @@ function Home() {
                         <option value={true}>{rsvpValues[0]}</option>
                         <option value={false}>{rsvpValues[1]}</option>
                       </Select>
-                      <FormHelperText>Required</FormHelperText>
+                      {formError.rsvp && <FormHelperText>{formError.rsvp}</FormHelperText>}
                     </FormControl>
                   </Grid>
 
@@ -147,7 +199,7 @@ function Home() {
                     return(
                       <Grid item container direction="row" spacing={2} key={"plusPerson" + i}>
                         <Grid item xs={12} sm={6}>
-                          <TextField id="fNamePP"
+                          <TextField name="fNamePP"
                                    label="First Name"
                                    variant="outlined"
                                    required
@@ -156,7 +208,7 @@ function Home() {
                                    fullWidth />
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                          <TextField id="lNamePP"
+                          <TextField name="lNamePP"
                                   label="Last Name"
                                   variant="outlined"
                                   required
@@ -177,7 +229,7 @@ function Home() {
                   }
 
                   <Grid item>
-                    <TextField id="allergies"
+                    <TextField name="allergies"
                              fullWidth
                              multiline
                              rows={4}
@@ -197,8 +249,9 @@ function Home() {
               </form>
             </Grid>
           </Grid>
+          }
         </Paper>
-      </div>}
+      </div>
     </div>
   );
 }
